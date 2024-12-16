@@ -1,5 +1,5 @@
 {
-  "name": "api_testing",
+  "name": "e2eapi",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
