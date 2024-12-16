@@ -1,5 +1,5 @@
 {
-  "name": "ui_testing",
+  "name": "e2eui",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
