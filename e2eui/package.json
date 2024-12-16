@@ -1,9 +1,9 @@
 {
-  "name": "api_testing",
+  "name": "e2eui",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js test" 
+    "test": "cucumber-js test"
   },
   "author": "Kalana Gunathilaka",
   "license": "ISC",
