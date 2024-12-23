@@ -3,9 +3,11 @@ import { DataFactory } from "./DataFactory";
 import { UserRole } from "../data/enum/UserRole";
 import { BaseUrl } from "../data/enum/BaseUrl";
 import { ServerResponse } from "../models/ServerResponse";
+import { EndPoint } from "../data/enum/EndPoint";
+import { Book } from "../models/Book";
 
 export class RequestHandler {
-
+   
     private request: APIRequestContext;
     private factoryData: DataFactory;
 
@@ -31,6 +33,16 @@ export class RequestHandler {
         const response = await this.request.put(`${BaseUrl.LOCAL}/${endPoint}/${param}`, { headers: headers, data: body });
         return this.getResponse(response);
     }
+
+    public async deleteRequest(userRole: UserRole, endPoint: string, param : string) {
+        const headers = this.setHeader(userRole);
+        const url=`${BaseUrl.LOCAL}/${endPoint}/${param}`;
+        const response = await this.request.delete(`${BaseUrl.LOCAL}/${endPoint}/${param}`, { headers: headers });
+        return this.getResponse(response);
+    }
+
+    
+
 
 
     private setHeader(userRole: UserRole) {
