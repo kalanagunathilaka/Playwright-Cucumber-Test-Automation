@@ -49,6 +49,10 @@ export class RequestHandler {
         const data = this.factoryData.getData();
         const headers: any = {};
 
+        if (userRole === UserRole.UNAUTHENTICATED) {
+            return headers;
+        }
+
         const username: string = userRole === UserRole.ADMIN ? data.authentication.admin : data.authentication.user;
         const password: string = data.authentication.password;
 

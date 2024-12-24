@@ -28,7 +28,51 @@ Given('an admin has created a book', async function () {
 When('the admin deletes the same book', async function () {
     const context: APIRequestContext = await request.newContext();
     const bookDeletion = new BookDeletion(context);
-    await bookDeletion.validBookDeletion(bookId); // Delete the book
+    await bookDeletion.deleteBookAdminValid(bookId); // Delete the book
+});
+
+When('the admin sends the delete request with missing ID', async function () {
+    const context: APIRequestContext = await request.newContext();
+    const bookDeletion = new BookDeletion(context);
+    await bookDeletion.deleteBookAdminInvalidIdMissing(); // Delete the book with missing ID
+});
+
+When('the admin deletes the book with an invalid ID', async function () {
+    const context: APIRequestContext = await request.newContext();
+    const bookDeletion = new BookDeletion(context);
+    await bookDeletion.deleteBookAdminInvalidId(); // Delete the book with invalid ID
+});
+
+When('the user tries to delete the same book', async function () {
+    const context: APIRequestContext = await request.newContext();
+    const bookDeletion = new BookDeletion(context);
+    await bookDeletion.deleteBookUserUnauthorized(bookId); // Delete the book as a user
+});
+
+When('the user sends the delete request with missing ID', async function () {
+    const context: APIRequestContext = await request.newContext();
+    const bookDeletion = new BookDeletion(context);
+    await bookDeletion.deleteBookUserInvalidIdMissing(); // Delete the book with missing ID as a user
+});
+
+When('the user tries to delete the book with an invalid ID', async function () {
+    const context: APIRequestContext = await request.newContext();
+    const bookDeletion = new BookDeletion(context);
+    await bookDeletion.deleteBookUserInvalidId(); // Delete the book with invalid ID as a user
+});
+
+
+
+When('User attempts to delete a book with an invalid ID', async function () {
+    const context: APIRequestContext = await request.newContext();
+    const bookDeletion = new BookDeletion(context);
+    await bookDeletion.deleteBookUserInvalidId(); // Delete the book with invalid ID as a user
+});
+
+When('the unauthenticated user tries to delete same the book', async function () {
+    const context: APIRequestContext = await request.newContext();
+    const bookDeletion = new BookDeletion(context);
+    await bookDeletion.deleteBookUnauthenticated(bookId); // Delete the book as an unauthenticated user
 });
 
 Then('the book should be deleted successfully', async function () {
