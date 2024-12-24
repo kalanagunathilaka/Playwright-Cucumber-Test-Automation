@@ -14,7 +14,7 @@ export class BookCreation {
 
     constructor(request: APIRequestContext) {
         this.request = request;
-        this.requestHandler = new RequestHandler(request);
+        this.requestHandler = new RequestHandler(this.request);
     }
 
     public async validBookCreation(){
@@ -32,6 +32,7 @@ export class BookCreation {
         expect(response.json.author).toBe(`${data.sharedData.randomStr}_AUTHOR`);
 
         console.log(`Book : ${data.sharedData.randomStr}_TITLE Successfully Saved.`);
+        book.id = response.json.id;
         return book;
     }
 }

@@ -3,9 +3,11 @@ import { DataFactory } from "./DataFactory";
 import { UserRole } from "../data/enum/UserRole";
 import { BaseUrl } from "../data/enum/BaseUrl";
 import { ServerResponse } from "../models/ServerResponse";
+import { EndPoint } from "../data/enum/EndPoint";
+import { Book } from "../models/Book";
 
 export class RequestHandler {
-
+   
     private request: APIRequestContext;
     private factoryData: DataFactory;
 
@@ -32,10 +34,24 @@ export class RequestHandler {
         return this.getResponse(response);
     }
 
+    public async deleteRequest(userRole: UserRole, endPoint: string, param : string) {
+        const headers = this.setHeader(userRole);
+        const url=`${BaseUrl.LOCAL}/${endPoint}/${param}`;
+        const response = await this.request.delete(`${BaseUrl.LOCAL}/${endPoint}/${param}`, { headers: headers });
+        return this.getResponse(response);
+    }
+
+    
+
+
 
     private setHeader(userRole: UserRole) {
         const data = this.factoryData.getData();
         const headers: any = {};
+
+        if (userRole === UserRole.UNAUTHENTICATED) {
+            return headers;
+        }
 
         const username: string = userRole === UserRole.ADMIN ? data.authentication.admin : data.authentication.user;
         const password: string = data.authentication.password;
