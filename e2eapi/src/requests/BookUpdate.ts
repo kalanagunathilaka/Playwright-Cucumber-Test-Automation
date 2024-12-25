@@ -15,9 +15,17 @@ export class BookUpdate {
         this.requestHandler = new RequestHandler(this.request);
     }
 
-    public async authorizedRequest(bookId: string, updatedBook: any) {
-        const response: ServerResponse = await this.requestHandler.putRequest(UserRole.ADMIN, EndPoint.UPDATEBOOK, bookId, updatedBook);
+    public async AdminauthorizedRequest( updatedBook: Book) {
+        const response: ServerResponse = await this.requestHandler.putRequest(UserRole.ADMIN, EndPoint.UPDATEBOOK, updatedBook);
         expect(response.status).toBe(ResponseStatusCode.OK);
-        console.log(`Admin successfully updated book: ${bookId}`);
+        console.log(`Admin successfully updated book: ${updatedBook.id}`);
     }
+
+    public async UserUnauthorizedRequest(updatedBook: Book) {
+        const response: ServerResponse = await this.requestHandler.putRequest(UserRole.USER, EndPoint.UPDATEBOOK, updatedBook);
+        expect(response.status).toBe(ResponseStatusCode.UNAUTHORIZED);
+        console.log(`User unauthorized to update book: ${updatedBook.id}`);
+    }
+    
+    
 }
