@@ -16,6 +16,7 @@ export class RequestHandler {
         this.factoryData = DataFactory.getInstance();
     }
 
+
     public async getRequest(userRole: UserRole, endPoint: string, param = "") {
         const headers = this.setHeader(userRole);
         const response = await this.request.get(`${BaseUrl.LOCAL}/${endPoint}/${param}`, { headers: headers });
@@ -40,10 +41,6 @@ export class RequestHandler {
         const response = await this.request.delete(`${BaseUrl.LOCAL}/${endPoint}/${param}`, { headers: headers });
         return this.getResponse(response);
     }
-
-    
-
-
 
     private setHeader(userRole: UserRole) {
         const data = this.factoryData.getData();
