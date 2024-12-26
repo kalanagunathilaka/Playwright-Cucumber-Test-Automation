@@ -32,6 +32,29 @@ export class BookUpdate {
         expect(response.status).toBe(ResponseStatusCode.UNAUTHORIZED);
         console.log(`User unauthorized to update book: ${updatedBook.id}`);
     }
+
+    public async updateBookAdminInvalidId() {
+        const invalidBookId = "invalid-id";
+        const updatedBook: Book = { id: invalidBookId, title: "Invalid Book Update", author: "Invalid Author" };
+
+        const response: ServerResponse = await this.requestHandler.putRequest(UserRole.ADMIN, EndPoint.UPDATEBOOK, updatedBook);
+        expect(response.status).toBe(ResponseStatusCode.NOT_FOUND);
+        console.log(`Admin received 404 Not Found error for book ID: ${invalidBookId}`);
+    }
+
+    // public async updateBookAdminInvalidId() {
+    //     const invalidBookId = "invalid-id";
+    //     const response: ServerResponse = await this.requestHandler.putRequest(
+    //         UserRole.ADMIN,
+    //         `${EndPoint.UPDATEBOOK}/${invalidBookId}`,
+    //         updatedBook
+    //     );
+    //     expect(response.status).toBe(ResponseStatusCode.NOT_FOUND);
+    //     console.log(`Admin attempted to update invalid book ID: ${invalidBookId}`);
+    // }
+    
+
+    
     
     
 }

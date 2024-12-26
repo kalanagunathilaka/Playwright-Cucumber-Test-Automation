@@ -18,3 +18,7 @@ Scenario: unauthenticated user fails to update a book
     Given an Admin has created a book
     When the unauthenticated user updates the book details
     Then the book should not be updated
+
+Scenario: Admin attempts to update a book with an invalid ID
+    When the admin updates the book with an invalid ID
+    Then the admin should see a 404 Not Found error

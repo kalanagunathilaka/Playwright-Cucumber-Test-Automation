@@ -64,6 +64,13 @@ When('the unauthenticated user updates the book details', async function () {
     await bookUpdate.UnauthenticatedUserUnauthorizedRequest(updatedBook);
 });
 
+When('the admin updates the book with an invalid ID', async function () {
+    const context: APIRequestContext = await request.newContext();
+    const bookUpdate = new BookUpdate(context);
+    await bookUpdate.updateBookAdminInvalidId(); 
+});
+
+
 Then('the book should not be updated', async function () {
     // Validate that the book details have not changed
     const context: APIRequestContext = await request.newContext();
