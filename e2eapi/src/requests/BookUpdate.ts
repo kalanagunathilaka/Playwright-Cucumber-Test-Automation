@@ -26,6 +26,12 @@ export class BookUpdate {
         expect(response.status).toBe(ResponseStatusCode.UNAUTHORIZED);
         console.log(`User unauthorized to update book: ${updatedBook.id}`);
     }
+
+    public async UnauthenticatedUserUnauthorizedRequest(updatedBook: Book) {
+        const response: ServerResponse = await this.requestHandler.putRequest(UserRole.UNAUTHENTICATED, EndPoint.UPDATEBOOK, updatedBook);
+        expect(response.status).toBe(ResponseStatusCode.UNAUTHORIZED);
+        console.log(`User unauthorized to update book: ${updatedBook.id}`);
+    }
     
     
 }

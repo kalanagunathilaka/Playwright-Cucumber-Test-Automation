@@ -55,6 +55,15 @@ When('the user updates the book details', async function () {
     await bookUpdate.UserUnauthorizedRequest(updatedBook);
 });
 
+When('the unauthenticated user updates the book details', async function () {
+    const context: APIRequestContext = await request.newContext();
+    const bookUpdate = new BookUpdate(context);
+    console.log(`Attempting to update book as user: ${bookId} - ${updatedBook.title}`);
+    updatedBook.id = bookId;
+
+    await bookUpdate.UnauthenticatedUserUnauthorizedRequest(updatedBook);
+});
+
 Then('the book should not be updated', async function () {
     // Validate that the book details have not changed
     const context: APIRequestContext = await request.newContext();
@@ -66,6 +75,10 @@ Then('the book should not be updated', async function () {
     expect(response.json.author).not.toBe(updatedBook.author); // Author should not have been updated
     console.log(`Unauthorized book update was correctly prevented for ${bookId}`);
 });
+
+
+
+
 
 
 
