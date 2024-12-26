@@ -12,6 +12,7 @@ Scenario: Admin successfully updates a book
 Scenario: User fails to update a book
     Given an Admin has created a book
     When the user updates the book details
+
     Then the book should not be updated
 
 Scenario: unauthenticated user fails to update a book
@@ -22,3 +23,7 @@ Scenario: unauthenticated user fails to update a book
 Scenario: Admin attempts to update a book with an invalid ID
     When the admin updates the book with an invalid ID
     Then the admin should see a 404 Not Found error
+
+Scenario: User attempts to update a book with an invalid ID
+    When the user updates the book with an invalid ID
+    Then the user should see a 401 Unauthorized error
