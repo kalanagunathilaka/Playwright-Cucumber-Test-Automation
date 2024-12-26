@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js test" 
+    "test:cucumber": "cucumber-js test" ,
+    "test:cucumber-htmlreport": " npx cucumber-js features/BookDeletion.feature --format html:cucumber-report.html"
   },
   "author": "Kalana Gunathilaka",
   "license": "ISC",

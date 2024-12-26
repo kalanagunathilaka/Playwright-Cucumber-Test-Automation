@@ -8,6 +8,7 @@
             "src/tests/features/**/*.feature"
         ],
         "require": [
+            "src/tests/support/**/*.ts",
             "src/tests/steps/**/*.ts"
         ],
         "requireModule": [
