@@ -16,9 +16,11 @@ export class RequestHandler {
         this.factoryData = DataFactory.getInstance();
     }
 
+
     public async getRequest(userRole: UserRole, endPoint: string, param = "") {
         const headers = this.setHeader(userRole);
         const response = await this.request.get(`${BaseUrl.LOCAL}/${endPoint}/${param}`, { headers: headers });
+        console.log("response",response);
         return this.getResponse(response);
     }
 
@@ -28,9 +30,10 @@ export class RequestHandler {
         return this.getResponse(response);
     }
 
-    public async putRequest(userRole: UserRole, endPoint: string, body: any, param = "") {
+    public async putRequest(userRole: UserRole, endPoint: string, body: Book, param = "") {
         const headers = this.setHeader(userRole);
-        const response = await this.request.put(`${BaseUrl.LOCAL}/${endPoint}/${param}`, { headers: headers, data: body });
+        const response = await this.request.post(`${BaseUrl.LOCAL}/${endPoint}/${param}`, { headers: headers, data: body });
+        console.log("url",`${BaseUrl.LOCAL}/${endPoint}`);
         return this.getResponse(response);
     }
 
@@ -40,10 +43,6 @@ export class RequestHandler {
         const response = await this.request.delete(`${BaseUrl.LOCAL}/${endPoint}/${param}`, { headers: headers });
         return this.getResponse(response);
     }
-
-    
-
-
 
     private setHeader(userRole: UserRole) {
         const data = this.factoryData.getData();
