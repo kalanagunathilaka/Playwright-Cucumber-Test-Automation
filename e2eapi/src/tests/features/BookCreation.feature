@@ -1,4 +1,4 @@
-# Feature: Create a new book
+Feature: Create a new book
 
-#   Scenario: Valid Create a new book
-#     Given Send Create a new book request
+  Scenario: Valid Create a new book
+    Given Send Create a new book request
