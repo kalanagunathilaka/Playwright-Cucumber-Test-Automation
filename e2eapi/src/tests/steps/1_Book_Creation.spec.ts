@@ -1,12 +1,10 @@
-import { Given, setDefaultTimeout } from '@cucumber/cucumber';
+import { Given, setDefaultTimeout, When } from '@cucumber/cucumber';
 import { BookCreation } from '../../requests/BookCreation';
-import { APIRequestContext, request } from 'playwright';
 
 setDefaultTimeout(60 * 1000);
 
-Given('Send Create a new book request', async () => {
+Given('Send Create a new book request', async function () {
     console.log('Send Create a new book request');
-    const context: APIRequestContext = await request.newContext();
-    const bookCreation: BookCreation = new BookCreation(context);
+    const bookCreation: BookCreation = new BookCreation(this.context);
     await bookCreation.validBookCreation();
 });
