@@ -2,7 +2,7 @@
     "default": {
         "dryRun": false,
         "formatOptions": {
-            "snippetInterface": "aysnc-await"
+            "snippetInterface": "async-await"
         },
         "paths": [
             "src/tests/features/**/*.feature"

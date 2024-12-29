@@ -32,7 +32,7 @@ export class RequestHandler {
 
     public async putRequest(userRole: UserRole, endPoint: string, body: Book, param = "") {
         const headers = this.setHeader(userRole);
-        const response = await this.request.post(`${BaseUrl.LOCAL}/${endPoint}/${param}`, { headers: headers, data: body });
+        const response = await this.request.put(`${BaseUrl.LOCAL}/${endPoint}/${param}`, { headers: headers, data: body });
         console.log("url",`${BaseUrl.LOCAL}/${endPoint}`);
         return this.getResponse(response);
     }
