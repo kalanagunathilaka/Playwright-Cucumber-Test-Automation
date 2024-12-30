@@ -15,6 +15,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Debug Repository Structure for e2eapi
+      run: ls ./e2eapi
+
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
