@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "test": "npx cucumber-js --format progress",
     "test:cucumber": "cucumber-js test",
-    "test:cucumber-htmlreport": " npx cucumber-js features/BookDeletion.feature --format html:cucumber-report.html",
+    "test:cucumber-htmlreport": " npx cucumber-js --format html:cucumber-report.html",
     "convert:allure": "allure-cucumberjs -i reports/cucumber_report.json -o allure-results",
     "allure:generate": "allure generate allure-results --clean",
     "allure:open": "allure open",
