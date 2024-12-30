@@ -16,16 +16,44 @@ export class BookUpdate {
     }
 
     public async AdminauthorizedRequest( updatedBook: Book) {
-        const response: ServerResponse = await this.requestHandler.putRequest(UserRole.ADMIN, EndPoint.UPDATEBOOK, updatedBook);
+        const response: ServerResponse = await this.requestHandler.putRequest(UserRole.ADMIN, EndPoint.UPDATEBOOK, updatedBook,updatedBook.id);
         expect(response.status).toBe(ResponseStatusCode.OK);
         console.log(`Admin successfully updated book: ${updatedBook.id}`);
     }
 
     public async UserUnauthorizedRequest(updatedBook: Book) {
-        const response: ServerResponse = await this.requestHandler.putRequest(UserRole.USER, EndPoint.UPDATEBOOK, updatedBook);
+        const response: ServerResponse = await this.requestHandler.putRequest(UserRole.USER, EndPoint.UPDATEBOOK, updatedBook,updatedBook.id);
         expect(response.status).toBe(ResponseStatusCode.UNAUTHORIZED);
         console.log(`User unauthorized to update book: ${updatedBook.id}`);
     }
+
+    public async UnauthenticatedUserUnauthorizedRequest(updatedBook: Book) {
+        const response: ServerResponse = await this.requestHandler.putRequest(UserRole.UNAUTHENTICATED, EndPoint.UPDATEBOOK, updatedBook,updatedBook.id);
+        expect(response.status).toBe(ResponseStatusCode.FORBIDDEN);
+        console.log(`User unauthorized to update book: ${updatedBook.id}`);
+    }
+
+    public async updateBookAdminInvalidId() {
+        
+        const updatedBook: Book = { id: -1, title: "Invalid Book Update", author: "Invalid Author" };
+
+        const response: ServerResponse = await this.requestHandler.putRequest(UserRole.ADMIN, EndPoint.UPDATEBOOK, updatedBook,updatedBook.id);
+        expect(response.status).toBe(ResponseStatusCode.NOT_FOUND);
+        console.log(`Admin received 404 Not Found error for book ID: ${updatedBook.id}`);
+    }
+
+    public async updateBookUserInvalidId() {
+        const updatedBook: Book = { id: -1, title: "Invalid Book Update", author: "Invalid Author" };
+        const response: ServerResponse = await this.requestHandler.putRequest(UserRole.USER, EndPoint.UPDATEBOOK, updatedBook, updatedBook.id);
+        expect(response.status).toBe(ResponseStatusCode.FORBIDDEN); 
+        console.log(`User should see a 403 Forbidden error for book ID: ${updatedBook.id}`);
+    }
+    
+
+
+    
+
+    
     
     
 }
