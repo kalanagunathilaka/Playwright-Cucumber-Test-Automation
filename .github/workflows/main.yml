@@ -43,7 +43,7 @@ jobs:
       run: |
         java -jar demo-0.0.1-SNAPSHOT.jar & 
         echo "Waiting for API to be ready..."
-        until curl -s http://localhost:8080/health | grep "UP"; do
+        until curl -s http://localhost:7081/health | grep "UP"; do
         sleep 5
         echo "Still waiting for API..."
         done
