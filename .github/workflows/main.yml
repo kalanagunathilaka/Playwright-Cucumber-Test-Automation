@@ -54,7 +54,7 @@ jobs:
 
     - name: Run Cucumber tests & Generate Allure results 
       working-directory: ./e2eapi
-      run: npx cucumber-js
+      run: npx @cucumber/cucumber
 
     - name: Generate Allure Report
       working-directory: ./e2eapi
