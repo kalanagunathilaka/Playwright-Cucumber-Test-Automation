@@ -19,6 +19,7 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '20'
+        cache: 'npm'
 
     - name: Install Node.js dependencies
       working-directory: ./e2eapi
@@ -50,7 +51,7 @@ jobs:
 
   test-apis:
     runs-on: ubuntu-latest
-    needs: run-jar
+    needs: [run-jar,setup]
 
     steps:
     - name: Checkout code
@@ -74,7 +75,7 @@ jobs:
 
   deploy-allure:
     runs-on: ubuntu-latest
-    needs: test-apis
+    needs: [test-apis,setup]
 
     steps:
     - name: Checkout code
