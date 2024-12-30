@@ -1,0 +1,81 @@
+name: CI Pipeline for JAR and API Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install Node.js dependencies
+      working-directory: ./e2eapi
+      run: npm install
+
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+  run-jar:
+    runs-on: ubuntu-latest
+    needs: setup
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Run the JAR file
+      working-directory: ./API
+      run: |
+        java -jar demo-0.0.1-SNAPSHOT.jar & 
+        echo "Waiting for API to be ready..."
+        until curl -s http://localhost:8080/health | grep "UP"; do
+        sleep 5
+        echo "Still waiting for API..."
+        done
+        echo "API is ready."
+
+  test-apis:
+    runs-on: ubuntu-latest
+    needs: run-jar
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Run Cucumber tests & Generate Allure results 
+      working-directory: ./e2eapi
+      run: npx cucumber-js
+
+    - name: Generate Allure Report
+      working-directory: ./e2eapi
+      run: npx allure generate allure-results --clean
+
+  deploy-allure:
+    runs-on: ubuntu-latest
+    needs: test-apis
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Deploy Allure Report to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./e2eapi/allure-report
+        keep_files: false
