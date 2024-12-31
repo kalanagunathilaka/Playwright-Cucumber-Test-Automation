@@ -57,6 +57,9 @@ jobs:
 
     - name: Debug Networking
       run: netstat -tuln
+
+    - name: Test API with curl
+      run: curl -v http://127.0.0.1:7081/api/health
  
   test-apis:
     runs-on: ubuntu-latest
