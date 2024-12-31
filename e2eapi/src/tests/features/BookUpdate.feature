@@ -27,3 +27,29 @@ Scenario: Admin attempts to update a book with an invalid ID
 Scenario: User attempts to update a book with an invalid ID
     When the user updates the book with an invalid ID
     Then the user should see a 401 Unauthorized error
+
+# Anudhi's    
+
+Scenario: Admin attempts to update a book with missing ID
+    When the admin sends the update request with missing ID
+    Then the admin should see a 405 Method Not Allowed error
+
+Scenario: Admin attempts to update a book with missing title
+    When the admin sends the update request with missing title
+    Then the admin should see a 400 Bad Request error
+
+Scenario: Admin attempts to update a book with missing author
+    When the admin sends the update request with missing author
+    Then the admin should see a 400 Bad Request error
+
+Scenario: User attempts to update a book with missing ID
+    When the user sends the update request with missing ID
+    Then the user should see a 405 Method Not Allowed error
+
+Scenario: User attempts to update a book with missing title
+    When the user sends the update request with missing title
+    Then the user should see a 403 Forbidden error
+
+Scenario: User attempts to update a book with missing author
+    When the user sends the update request with missing author
+    Then the user should see a 400 Forbidden error
