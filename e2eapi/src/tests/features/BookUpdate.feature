@@ -52,4 +52,4 @@ Scenario: User attempts to update a book with missing title
 
 Scenario: User attempts to update a book with missing author
     When the user sends the update request with missing author
-    Then the user should see a 400 Forbidden error
+    Then the user should see a 403 Forbidden error
