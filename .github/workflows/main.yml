@@ -48,9 +48,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Set up Docker
-      run: sudo apt-get update && sudo apt-get install -y docker.io
-
     - name: Build and Start API in Docker
       working-directory: ./API
       run: |
