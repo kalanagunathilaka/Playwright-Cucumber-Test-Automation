@@ -6,10 +6,10 @@ export class PlaywrightConfig {
     private browser: Browser | null = null;
     private context: BrowserContext | null = null;
     private page: Page | null = null;
-    private baseUrl:string = Url.BASEURL;
+    private baseUrl: string = Url.BASEURL;
 
     // Private constructor to prevent direct instantiation
-    private constructor() {}
+    private constructor() { }
 
     // Public method to get the singleton instance
     public static getInstance(): PlaywrightConfig {
@@ -20,18 +20,13 @@ export class PlaywrightConfig {
     }
 
     public async getPage(): Promise<Page> {
-        if (!this.browser) {
-            this.browser = await chromium.launch({ headless: false });
-        }
-
-        if (!this.context) {
+        if (!this.page) {
+            this.browser = await chromium.launch({ headless: false});
             this.context = await this.browser.newContext({
                 baseURL: this.baseUrl,
             });
-        }
-
-        if (!this.page) {
             this.page = await this.context.newPage();
+            this.page.setDefaultTimeout(60 * 1000);
             await this.page.goto(this.baseUrl);
         }
 
@@ -40,22 +35,11 @@ export class PlaywrightConfig {
 
     public async closePage(): Promise<void> {
         if (this.page) {
-            await this.page.close();
-            this.page = null;
-        }
-
-        if (this.context) {
-            await this.context.close();
-            this.context = null;
-        }
-
-        if (this.browser) {
-            await this.browser.close();
-            this.browser = null;
+            await this.page.context().browser()?.close();
         }
     }
 
-    public getBaseUrl(){
+    public getBaseUrl() {
         return this.baseUrl;
     }
 }
