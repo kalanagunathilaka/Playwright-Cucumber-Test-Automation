@@ -58,15 +58,17 @@ export class BookUpdate {
     //Anudhi's
   
     public async updateBookAdminMissingId(updatedBook: Book) {
-        const response: ServerResponse = await this.requestHandler.putRequest(UserRole.ADMIN, EndPoint.UPDATEBOOK, updatedBook, "");
-        expect(response.status).toBe(ResponseStatusCode.METHOD_NOT_ALLOWED);
-        console.log(`Admin received 405 Method Not Allowed error for missing book ID`);
+            const response: ServerResponse = await this.requestHandler.putRequest(UserRole.ADMIN, EndPoint.UPDATEBOOK, updatedBook, "");
+            expect(response.status).toBe(ResponseStatusCode.METHOD_NOT_ALLOWED);
+            console.log(`Admin received 405 Method Not Allowed error for missing book ID`);
+            return response;
     }
 
     public async updateBookAdminMissingTitle(updatedBook: Book) {
         const incompleteBook = { ...updatedBook, title: "" }; // Clear title
         const response: ServerResponse = await this.requestHandler.putRequest(UserRole.ADMIN, EndPoint.UPDATEBOOK, incompleteBook, incompleteBook.id);
         expect(response.status).toBe(ResponseStatusCode.BAD_REQUEST);
+        return response;
         console.log(`Admin received 400 Bad Request error for missing title`);
     }
 
@@ -74,12 +76,14 @@ export class BookUpdate {
         const incompleteBook = { ...updatedBook, author: "" }; // Clear author
         const response: ServerResponse = await this.requestHandler.putRequest(UserRole.ADMIN, EndPoint.UPDATEBOOK, incompleteBook, incompleteBook.id);
         expect(response.status).toBe(ResponseStatusCode.BAD_REQUEST);
+        return response;
         console.log(`Admin received 400 Bad Request error for missing author`);
     }
 
     public async updateBookUserMissingId(updatedBook: Book) {
         const response: ServerResponse = await this.requestHandler.putRequest(UserRole.USER, EndPoint.UPDATEBOOK, updatedBook, "");
         expect(response.status).toBe(ResponseStatusCode.METHOD_NOT_ALLOWED);
+        return response;
         console.log(`User received 405 Method Not Allowed error for missing book ID`);
     }
 
@@ -87,6 +91,7 @@ export class BookUpdate {
         const incompleteBook = { ...updatedBook, title: "" }; // Clear title
         const response: ServerResponse = await this.requestHandler.putRequest(UserRole.USER, EndPoint.UPDATEBOOK, incompleteBook, incompleteBook.id);
         expect(response.status).toBe(ResponseStatusCode.FORBIDDEN);
+        return response;
         console.log(`User received 403 Forbidden error for missing title`);
     }
 
@@ -94,7 +99,8 @@ export class BookUpdate {
         const incompleteBook = { ...updatedBook, author: "" }; // Clear author
         const response: ServerResponse = await this.requestHandler.putRequest(UserRole.USER, EndPoint.UPDATEBOOK, incompleteBook, incompleteBook.id);
         expect(response.status).toBe(ResponseStatusCode.FORBIDDEN);
+        return response;
         console.log(`User received 403 Forbidden error for missing author`);
     }
-    
+
 }
