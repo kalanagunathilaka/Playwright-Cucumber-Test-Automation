@@ -15,9 +15,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Debug Repository Structure for e2eapi
-      run: ls ./e2eapi
-
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
@@ -36,10 +33,6 @@ jobs:
     - name: Install Node.js dependencies
       working-directory: ./e2eapi
       run: npm ci
-
-    - name: Debug Installed Dependencies
-      working-directory: ./e2eapi
-      run: npm list --depth=0
 
     - name: Set up Java
       uses: actions/setup-java@v3
@@ -110,9 +103,6 @@ jobs:
       with:
         name: allure-report
         path: allure-report
-
-    - name: Debug Downloaded Allure Report
-      run: ls -R allure-report
 
     - name: Deploy Allure Report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
