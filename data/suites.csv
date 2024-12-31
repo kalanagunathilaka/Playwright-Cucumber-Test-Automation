@@ -1,38 +1,38 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
 "As an admin or user
   I want to test book deletion functionality
-  So that I can validate the API behavior for different roles and scenarios","113","Admin successfully deletes a valid book","","Tue Dec 31 06:24:02 UTC 2024","failed","Tue Dec 31 06:24:02 UTC 2024","","","",""
+  So that I can validate the API behavior for different roles and scenarios","110","Unauthenticated user attempts to delete a book","","Tue Dec 31 09:20:31 UTC 2024","failed","Tue Dec 31 09:20:31 UTC 2024","","","",""
+"As an admin or user
+  I want to test book deletion functionality
+  So that I can validate the API behavior for different roles and scenarios","146","Admin successfully deletes a valid book","","Tue Dec 31 09:20:30 UTC 2024","failed","Tue Dec 31 09:20:31 UTC 2024","","","",""
+"","533","Valid Create a new book","","Tue Dec 31 09:20:30 UTC 2024","passed","Tue Dec 31 09:20:30 UTC 2024","","","",""
 "As an admin  or user
   I want to update a book
-  So that I can manage the books in the library","84","Admin attempts to update a book with an invalid ID","","Tue Dec 31 06:24:03 UTC 2024","passed","Tue Dec 31 06:24:03 UTC 2024","","","",""
-"As an admin or user
-  I want to test book deletion functionality
-  So that I can validate the API behavior for different roles and scenarios","85","User attempts to delete a book with an invalid ID","","Tue Dec 31 06:24:02 UTC 2024","failed","Tue Dec 31 06:24:02 UTC 2024","","","",""
-"As an admin or user
-  I want to test book deletion functionality
-  So that I can validate the API behavior for different roles and scenarios","91","Admin attempts to delete a book with missing ID","","Tue Dec 31 06:24:02 UTC 2024","failed","Tue Dec 31 06:24:02 UTC 2024","","","",""
-"As an admin or user
-  I want to test book deletion functionality
-  So that I can validate the API behavior for different roles and scenarios","193","User attempts to delete a book with valid details","","Tue Dec 31 06:24:02 UTC 2024","failed","Tue Dec 31 06:24:02 UTC 2024","","","",""
-"","506","Valid Create a new book","","Tue Dec 31 06:24:01 UTC 2024","passed","Tue Dec 31 06:24:02 UTC 2024","","","",""
+  So that I can manage the books in the library","88","Admin attempts to update a book with an invalid ID","","Tue Dec 31 09:20:32 UTC 2024","passed","Tue Dec 31 09:20:32 UTC 2024","","","",""
 "As an admin  or user
   I want to update a book
-  So that I can manage the books in the library","95","unauthenticated user fails to update a book","","Tue Dec 31 06:24:03 UTC 2024","failed","Tue Dec 31 06:24:03 UTC 2024","","","",""
+  So that I can manage the books in the library","103","unauthenticated user fails to update a book","","Tue Dec 31 09:20:32 UTC 2024","failed","Tue Dec 31 09:20:32 UTC 2024","","","",""
 "As an admin or user
   I want to test book deletion functionality
-  So that I can validate the API behavior for different roles and scenarios","93","Unauthenticated user attempts to delete a book","","Tue Dec 31 06:24:02 UTC 2024","failed","Tue Dec 31 06:24:02 UTC 2024","","","",""
-"As an admin  or user
-  I want to update a book
-  So that I can manage the books in the library","168","User fails to update a book","","Tue Dec 31 06:24:03 UTC 2024","failed","Tue Dec 31 06:24:03 UTC 2024","","","",""
-"As an admin  or user
-  I want to update a book
-  So that I can manage the books in the library","120","Admin successfully updates a book","","Tue Dec 31 06:24:02 UTC 2024","passed","Tue Dec 31 06:24:03 UTC 2024","","","",""
-"As an admin  or user
-  I want to update a book
-  So that I can manage the books in the library","82","User attempts to update a book with an invalid ID","","Tue Dec 31 06:24:03 UTC 2024","passed","Tue Dec 31 06:24:03 UTC 2024","","","",""
+  So that I can validate the API behavior for different roles and scenarios","90","User attempts to delete a book with missing ID","","Tue Dec 31 09:20:31 UTC 2024","failed","Tue Dec 31 09:20:31 UTC 2024","","","",""
 "As an admin or user
   I want to test book deletion functionality
-  So that I can validate the API behavior for different roles and scenarios","83","User attempts to delete a book with missing ID","","Tue Dec 31 06:24:02 UTC 2024","failed","Tue Dec 31 06:24:02 UTC 2024","","","",""
+  So that I can validate the API behavior for different roles and scenarios","101","Admin attempts to delete a book with an invalid ID","","Tue Dec 31 09:20:31 UTC 2024","failed","Tue Dec 31 09:20:31 UTC 2024","","","",""
+"As an admin  or user
+  I want to update a book
+  So that I can manage the books in the library","173","User fails to update a book","","Tue Dec 31 09:20:31 UTC 2024","failed","Tue Dec 31 09:20:32 UTC 2024","","","",""
 "As an admin or user
   I want to test book deletion functionality
-  So that I can validate the API behavior for different roles and scenarios","90","Admin attempts to delete a book with an invalid ID","","Tue Dec 31 06:24:02 UTC 2024","failed","Tue Dec 31 06:24:02 UTC 2024","","","",""
+  So that I can validate the API behavior for different roles and scenarios","108","Admin attempts to delete a book with missing ID","","Tue Dec 31 09:20:31 UTC 2024","failed","Tue Dec 31 09:20:31 UTC 2024","","","",""
+"As an admin  or user
+  I want to update a book
+  So that I can manage the books in the library","118","Admin successfully updates a book","","Tue Dec 31 09:20:31 UTC 2024","passed","Tue Dec 31 09:20:31 UTC 2024","","","",""
+"As an admin  or user
+  I want to update a book
+  So that I can manage the books in the library","87","User attempts to update a book with an invalid ID","","Tue Dec 31 09:20:32 UTC 2024","passed","Tue Dec 31 09:20:32 UTC 2024","","","",""
+"As an admin or user
+  I want to test book deletion functionality
+  So that I can validate the API behavior for different roles and scenarios","200","User attempts to delete a book with valid details","","Tue Dec 31 09:20:31 UTC 2024","failed","Tue Dec 31 09:20:31 UTC 2024","","","",""
+"As an admin or user
+  I want to test book deletion functionality
+  So that I can validate the API behavior for different roles and scenarios","94","User attempts to delete a book with an invalid ID","","Tue Dec 31 09:20:31 UTC 2024","failed","Tue Dec 31 09:20:31 UTC 2024","","","",""
