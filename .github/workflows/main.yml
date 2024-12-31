@@ -109,6 +109,10 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: allure-report
+        path: allure-report
+
+    - name: Debug Downloaded Allure Report
+      run: ls -R allure-report
 
     - name: Deploy Allure Report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
