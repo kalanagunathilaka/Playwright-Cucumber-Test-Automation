@@ -91,6 +91,10 @@ jobs:
       working-directory: ./e2eapi
       run: npx allure generate allure-results --clean
 
+    - name: Debug Allure Report Directory
+      working-directory: ./e2eapi
+      run: ls -R allure-report
+  
   deploy-allure:
     runs-on: ubuntu-latest
     needs: [test-apis,setup]
@@ -98,6 +102,10 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+
+    - name: Debug Allure Report Directory
+      working-directory: ./e2eapi
+      run: ls -R allure-report
 
     - name: Deploy Allure Report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
