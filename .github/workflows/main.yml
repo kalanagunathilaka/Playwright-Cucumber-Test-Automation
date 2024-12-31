@@ -22,7 +22,16 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '20'
-        # cache: 'npm'
+        cache: 'npm'
+        cache-dependency-path: ./e2eapi/package-lock.json
+
+    - name: Cache Node.js modules
+      uses: actions/cache@v3
+      with:
+        path: ./e2eapi/node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('e2eapi/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
 
     - name: Install Node.js dependencies
       working-directory: ./e2eapi
@@ -59,6 +68,19 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Cache Node.js modules
+      uses: actions/cache@v3
+      with:
+        path: ./e2eapi/node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('e2eapi/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
 
     - name: Run Cucumber tests & Generate Allure results 
       working-directory: ./e2eapi
