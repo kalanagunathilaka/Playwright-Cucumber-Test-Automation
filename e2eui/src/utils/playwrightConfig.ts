@@ -1,12 +1,12 @@
 import { Browser, BrowserContext, chromium, Page } from 'playwright';
-import { BaseUrl } from '../data/enum/BaseUrl';
+import { Url } from '../data/enum/Urls';
 
 export class PlaywrightConfig {
     private static instance: PlaywrightConfig;
     private browser: Browser | null = null;
     private context: BrowserContext | null = null;
     private page: Page | null = null;
-    private baseUrl:string = BaseUrl.URL;
+    private baseUrl:string = Url.BASEURL;
 
     // Private constructor to prevent direct instantiation
     private constructor() {}
