@@ -48,18 +48,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Start API Server
+    - name: Set up Docker
+      run: sudo apt-get update && sudo apt-get install -y docker.io
+
+    - name: Build and Start API in Docker
       working-directory: ./API
       run: |
-       java -Djava.net.preferIPv4Stack=true -jar demo-0.0.1-SNAPSHOT.jar >api.log 2>&1 &
-       sleep 10
-       cat api.log
-
-    - name: Debug Networking
-      run: netstat -tuln
-
-    - name: Test API with curl
-      run: curl -v http://127.0.0.1:7081/api/health
+        echo "FROM openjdk:17-jdk-alpine" > Dockerfile
+        echo "COPY demo-0.0.1-SNAPSHOT.jar /app.jar" >> Dockerfile
+        echo "CMD [\"java\", \"-jar\", \"/app.jar\"]" >> Dockerfile
+        docker build -t api-server .
+        docker run -d -p 7081:7081 --name api-server api-server
  
   test-apis:
     runs-on: ubuntu-latest
