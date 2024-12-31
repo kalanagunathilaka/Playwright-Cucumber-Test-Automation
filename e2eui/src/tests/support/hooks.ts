@@ -1,5 +1,5 @@
 import { After, AfterAll, BeforeAll, setDefaultTimeout } from "@cucumber/cucumber";
-import { PlaywrightConfig } from "../../utils/PlaywrightConfig";
+import { PlaywrightConfig } from "../../utils/playwrightConfig";
 
 setDefaultTimeout(60 * 1000);
 const playwrightConfig: PlaywrightConfig = PlaywrightConfig.getInstance();
