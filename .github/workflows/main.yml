@@ -25,13 +25,13 @@ jobs:
         cache: 'npm'
         cache-dependency-path: ./e2eapi/package-lock.json
 
-    - name: Cache Node.js modules
-      uses: actions/cache@v3
-      with:
-        path: ./e2eapi/node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('e2eapi/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+    # - name: Cache Node.js modules
+    #   uses: actions/cache@v3
+    #   with:
+    #     path: ./e2eapi/node_modules
+    #     key: ${{ runner.os }}-node-${{ hashFiles('e2eapi/package-lock.json') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-node-
 
     - name: Install Node.js dependencies
       working-directory: ./e2eapi
@@ -74,13 +74,13 @@ jobs:
       with:
         node-version: '20'
 
-    - name: Cache Node.js modules
-      uses: actions/cache@v3
-      with:
-        path: ./e2eapi/node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('e2eapi/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+    # - name: Cache Node.js modules
+    #   uses: actions/cache@v3
+    #   with:
+    #     path: ./e2eapi/node_modules
+    #     key: ${{ runner.os }}-node-${{ hashFiles('e2eapi/package-lock.json') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-node-
 
     - name: Run Cucumber tests & Generate Allure results 
       working-directory: ./e2eapi
