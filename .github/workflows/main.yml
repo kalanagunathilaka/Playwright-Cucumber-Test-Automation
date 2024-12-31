@@ -91,9 +91,11 @@ jobs:
       working-directory: ./e2eapi
       run: npx allure generate allure-results --clean
 
-    - name: Debug Allure Report Directory
-      working-directory: ./e2eapi
-      run: ls -R allure-report
+    - name: Upload Allure Report as Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: allure-report
+        path: ./e2eapi/allure-report
   
   deploy-allure:
     runs-on: ubuntu-latest
@@ -103,13 +105,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Debug Allure Report Directory
-      working-directory: ./e2eapi
-      run: ls -R allure-report
+    - name: Download Allure Report Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: allure-report
 
     - name: Deploy Allure Report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./e2eapi/allure-report
+        publish_dir: allure-report
         keep_files: false
