@@ -4,15 +4,18 @@ import { DataFactory } from "../utils/dataFactory";
 import { RegistrationLocators } from "../locators/registrationLocator";
 import { expect } from "playwright/test";
 import { Url } from "../data/enum/Urls";
+import { PageHelper } from "./helper/pageHelper";
 
 export class Registration {
     private page: Page = undefined as unknown as Page;
     private playwrightConfig: PlaywrightConfig;
     private dataFactory: DataFactory;
+    private pageHelper: PageHelper;
 
     constructor() {
         this.playwrightConfig = PlaywrightConfig.getInstance();
         this.dataFactory = DataFactory.getInstance();
+        this.pageHelper = new PageHelper();
     }
 
     public async verifyRegistrationPage(): Promise<void> {
@@ -44,11 +47,19 @@ export class Registration {
         await this.page.fill(RegistrationLocators.FIRST_NAME, firstName);
         await this.page.fill(RegistrationLocators.LAST_NAME, lastName);
         await this.page.fill(RegistrationLocators.USERNAME, userName);
+
+        // Validate the username is available by waiting for the API response
+        const validateUserNameRes = await this.pageHelper.waitForApiResponse(`${data.registrationData.apiEndpoints.validateUserName}/${userName}`);
+        expect(validateUserNameRes).toEqual(true);
+
         await this.page.fill(RegistrationLocators.PASSWORD, password);
         await this.page.fill(RegistrationLocators.CONFIRMPASSWORD, password);
         await this.page.locator(RegistrationLocators.GENDER).check();
 
         await this.page.locator(RegistrationLocators.REGISTER_BUTTON).click();
+
+        // Wait for the user API response to confirm the registration
+        await this.pageHelper.waitForApiResponse(data.registrationData.apiEndpoints.registerUser);
 
         this.dataFactory.setData('registrationData.userDetails.firstName', firstName);
         this.dataFactory.setData('registrationData.userDetails.userName', userName);

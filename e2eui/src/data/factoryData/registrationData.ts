@@ -6,4 +6,8 @@ export const registrationData = {
         lastName: "lastName",
         gender: "Male"
     },
+    apiEndpoints: {
+        validateUserName: "/api/user/validateUserName",
+        registerUser: "/api/user"
+    }
 }

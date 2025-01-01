@@ -17,15 +17,15 @@ When('User Submit the registration form with valid data', async function () {
 
 Then('User should redirected to the Login Page', async function () {
     console.log('\nUser should redirected to the Login Page');
-    //await login.verifyLoginPage(true);
+    await login.verifyLoginPage(true);
 });
 
 When('User submit the login form with registered credentials', async function () {
     console.log('\nUser submit the login form with registered credentials');
-    //await login.loginWithValidCredentials(true);
+    await login.loginWithValidCredentials(true);
 });
 
 Then('Registered user should be logged in successfully', async function () {
     console.log('\nRegistered user should be logged in successfully');
-    //await login.verifyLoggedInSuccessfully(true);
+    await login.verifyLoggedInSuccessfully(true);
 });
