@@ -1,4 +1,3 @@
-import { data } from './../../../e2eapi/src/data/factoryData/data';
 import { PlaywrightConfig } from './../utils/playwrightConfig';
 import { Page } from 'playwright';
 import { DataFactory } from './../utils/dataFactory';
@@ -28,40 +27,41 @@ export class Login {
         await this.verifyLoggedInSuccessfully();
     }
 
-    public async verifyLoginPage(): Promise<void> {
+    public async verifyLoginPage(isRedirect: boolean = false): Promise<void> {
         this.page = await this.playwrightConfig.getPage();
 
-        await this.page.goto(Url.LOGIN);
+        if (!isRedirect) {
+            await this.page.goto(Url.LOGIN);
+        }
         await Promise.all([
             expect(this.page.locator(LoginLocators.TITLE).getByText("Login")).toBeVisible(),
             expect(this.page).toHaveURL(Url.BASEURL + Url.LOGIN),
+            expect(this.page.locator(LoginLocators.USERNAME)).toBeVisible(),
+            expect(this.page.locator(LoginLocators.PASSWORD)).toBeVisible(),
+            expect(this.page.locator(LoginLocators.LOGIN_BUTTON)).toBeEnabled()
         ]);        
 
         console.log('Login Page loaded successfully');
     }
 
-    public async loginWithValidCredentials(): Promise<void> {
+    public async loginWithValidCredentials(isRegistration: boolean = false): Promise<void> {
         const data = this.dataFactory.getData();
+        const { userName, password } = isRegistration ? data.registrationData.userDetails : data.loginData.userDetails;      
 
-        await Promise.all([
-            expect(this.page.locator(LoginLocators.USERNAME)).toBeVisible(),
-            expect(this.page.locator(LoginLocators.PASSWORD)).toBeVisible(),
-            expect(this.page.locator(LoginLocators.LOGIN_BUTTON)).toBeEnabled(),
-        ]);        
-
-        await this.page.fill(LoginLocators.USERNAME, data.loginData.userDetails.userName);
-        await this.page.fill(LoginLocators.PASSWORD, data.loginData.userDetails.password);
+        await this.page.fill(LoginLocators.USERNAME, userName);
+        await this.page.fill(LoginLocators.PASSWORD, password);
         await this.page.click(LoginLocators.LOGIN_BUTTON);
 
-        console.log(`Logging with userName: ${data.loginData.userDetails.userName} and password: ${data.loginData.userDetails.password}`);
+        console.log(`Logging with userName: ${userName} and password: ${password}`);
     }
 
-    public async verifyLoggedInSuccessfully(): Promise<void> {
+    public async verifyLoggedInSuccessfully(isRegistration: boolean = false): Promise<void> {
         const data = this.dataFactory.getData();
+        const { userName } = isRegistration ? data.registrationData.userDetails : data.loginData.userDetails;
 
         await Promise.all([
             expect(this.page.locator(HeaderLocators.WISH_LIST)).toBeEnabled(),
-            expect(this.page.locator(HeaderLocators.USERNAME).getByText(data.loginData.userDetails.userName)).toBeVisible()
+            expect(this.page.locator(HeaderLocators.USERNAME).getByText(userName)).toBeVisible()
         ]);
         this.dataFactory.setData("loginData.isLoggedIn", true);
 
@@ -87,5 +87,30 @@ export class Login {
         this.dataFactory.setData("loginData.isLoggedIn", false);
 
         console.log('User logged out successfully');
+    }
+
+    public async loginWithInValidCredentials(): Promise<void> {
+        const data = this.dataFactory.getData();
+
+        await Promise.all([
+            expect(this.page.locator(LoginLocators.USERNAME)).toBeVisible(),
+            expect(this.page.locator(LoginLocators.PASSWORD)).toBeVisible(),
+            expect(this.page.locator(LoginLocators.LOGIN_BUTTON)).toBeEnabled(),
+        ]);        
+
+        await this.page.fill(LoginLocators.USERNAME, data.loginData.invalidUserDetails.userName);
+        await this.page.fill(LoginLocators.PASSWORD, data.loginData.invalidUserDetails.password);
+        await this.page.click(LoginLocators.LOGIN_BUTTON);
+
+        console.log(`Logging with userName: InvalidUserName and password: InvalidPassword`);
+    }
+
+    public async verifyErrorMessage(): Promise<void> {
+        await Promise.all([
+            expect(this.page.locator(LoginLocators.TITLE).getByText("Login")).toBeVisible(),
+            expect(this.page.locator(LoginLocators.ERROR_MESSAGE).getByText("Username or Password is incorrect.")).toBeVisible(),
+        ]);
+
+        console.log('Error message displayed successfully');
     }
 }
