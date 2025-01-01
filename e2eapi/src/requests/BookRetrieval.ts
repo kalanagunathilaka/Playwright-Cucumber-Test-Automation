@@ -33,7 +33,7 @@ export class BookRetrieval {
     }
 
     public async getBookUnauthenticated(bookId: string) {
-        const response: ServerResponse = await this.requestHandler.getRequest(UserRole.UNAUTHENTICATED, EndPoint.GETBOOKBYID, bookId);
+        const response: ServerResponse = await this.requestHandler.getRequest(UserRole.UNAUTHORIZED, EndPoint.GETBOOKBYID, bookId);
 
         console.log(response)
         expect(response.status).toBe(ResponseStatusCode.UNAUTHORIZED);

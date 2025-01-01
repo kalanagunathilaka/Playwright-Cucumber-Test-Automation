@@ -5,7 +5,7 @@ Feature: Book retrieval functionality
   So that I can validate the API's response for different scenarios
 
   Scenario: Admin retrieves a book by a valid ID
-    Given an admin has created a book
+    Given admin has created a book
     When the admin retrieves the book by its ID
     Then the book details should be returned successfully
 
@@ -14,7 +14,7 @@ Feature: Book retrieval functionality
     Then the admin should see a 404 Not Found error
 
   Scenario: User retrieves a book by a valid ID
-    Given an admin has created a book
+    Given admin has created a book
     When the user retrieves the book by its ID
     Then the book details should be returned successfully
 
@@ -23,6 +23,6 @@ Feature: Book retrieval functionality
     Then the user should see a 404 Not Found error
 
   Scenario: Unauthenticated user attempts to retrieve a book
-    Given an admin has created a book
+    Given admin has created a book
     When an unauthenticated user retrieves the book by its ID
     Then the user should see a 401 Unauthorized error
