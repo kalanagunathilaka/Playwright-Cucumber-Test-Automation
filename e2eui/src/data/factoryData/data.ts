@@ -1,7 +1,7 @@
 import { sharedData } from "./sharedData";
-import { login } from "./login";
+import { loginData } from "./loginData";
 
 export const data = {
     sharedData,
-    login
+    loginData
 }
