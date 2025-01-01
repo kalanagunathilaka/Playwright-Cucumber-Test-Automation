@@ -7,7 +7,7 @@ import { EndPoint } from "../data/enum/EndPoint";
 import { Book } from "../models/Book";
 
 export class RequestHandler {
-   
+
     private request: APIRequestContext;
     private factoryData: DataFactory;
 
@@ -16,11 +16,9 @@ export class RequestHandler {
         this.factoryData = DataFactory.getInstance();
     }
 
-
     public async getRequest(userRole: UserRole, endPoint: string, param = "") {
         const headers = this.setHeader(userRole);
         const response = await this.request.get(`${BaseUrl.LOCAL}/${endPoint}/${param}`, { headers: headers });
-        console.log("response",response);
         return this.getResponse(response);
     }
 
@@ -30,16 +28,16 @@ export class RequestHandler {
         return this.getResponse(response);
     }
 
-    public async putRequest(userRole: UserRole, endPoint: string, body: Book, param :any) {
+    public async putRequest(userRole: UserRole, endPoint: string, body: Book, param: any) {
         const headers = this.setHeader(userRole);
         const response = await this.request.put(`${BaseUrl.LOCAL}/${endPoint}/${param}`, { headers: headers, data: body });
-        console.log("url",`${BaseUrl.LOCAL}/${endPoint}`);
+        console.log("url", `${BaseUrl.LOCAL}/${endPoint}`);
         return this.getResponse(response);
     }
 
-    public async deleteRequest(userRole: UserRole, endPoint: string, param : string) {
+    public async deleteRequest(userRole: UserRole, endPoint: string, param: string) {
         const headers = this.setHeader(userRole);
-        const url=`${BaseUrl.LOCAL}/${endPoint}/${param}`;
+        const url = `${BaseUrl.LOCAL}/${endPoint}/${param}`;
         const response = await this.request.delete(`${BaseUrl.LOCAL}/${endPoint}/${param}`, { headers: headers });
         return this.getResponse(response);
     }
@@ -48,15 +46,20 @@ export class RequestHandler {
         const data = this.factoryData.getData();
         const headers: any = {};
 
-        if (userRole === UserRole.UNAUTHENTICATED) {
-            return headers;
-        }
-
-        const username: string = userRole === UserRole.ADMIN ? data.authentication.admin : data.authentication.user;
+        const username: string = (() => {
+            switch (userRole) {
+                case UserRole.ADMIN:
+                    return data.authentication.admin;
+                case UserRole.USER:
+                    return data.authentication.user;
+                default:
+                    return data.authentication.unauthorized;
+            }
+        })();
         const password: string = data.authentication.password;
 
         const userCredentials = Buffer.from(`${username}:${password}`).toString('base64');
-        
+
         headers["Authorization"] = `Basic ${userCredentials}`;
         return headers;
     }
