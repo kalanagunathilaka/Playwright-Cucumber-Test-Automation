@@ -62,7 +62,7 @@ export class BookDeletion {
     }
 
     public async deleteBookUnauthenticated(bookId: string) {
-        const response: ServerResponse = await this.requestHandler.deleteRequest(UserRole.UNAUTHENTICATED, EndPoint.DELETEBOOK, bookId);
+        const response: ServerResponse = await this.requestHandler.deleteRequest(UserRole.UNAUTHORIZED, EndPoint.DELETEBOOK, bookId);
         expect(response.status).toBe(ResponseStatusCode.UNAUTHORIZED);
         console.log(`Unauthenticated user unauthorized to delete book: ${bookId}`);
     }

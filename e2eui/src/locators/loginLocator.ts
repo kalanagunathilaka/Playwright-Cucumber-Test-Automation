@@ -3,4 +3,5 @@ export class LoginLocators {
     static readonly USERNAME = 'input[formcontrolname="username"]';
     static readonly PASSWORD = 'input[formcontrolname="password"]';
     static readonly LOGIN_BUTTON = 'xpath=//button[span[text()="Login"]]';
+    static readonly ERROR_MESSAGE = '#mat-mdc-error-0';
 }
