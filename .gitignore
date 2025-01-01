@@ -1,3 +1,5 @@
 
 /e2eapi/allure-report
 /e2eapi/allure-results
+/e2eui/reports
+/e2eui/reports/screenshots
