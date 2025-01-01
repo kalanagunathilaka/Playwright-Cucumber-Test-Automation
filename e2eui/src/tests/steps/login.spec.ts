@@ -18,3 +18,13 @@ Then('User should be logged in successfully', async function () {
     console.log('\nUser should be logged in successfully');
     await login.verifyLoggedInSuccessfully();
 });
+
+When('User submit the login form with invalid credentials', async function () {
+    console.log('\nUser submit the login form with invalid credentials');
+    await login.loginWithInValidCredentials();
+});
+
+Then('User should see an error message', async function () {
+    console.log('\nUser should see an error message');
+    await login.verifyErrorMessage();
+});
