@@ -28,7 +28,7 @@ export class BookUpdate {
     }
 
     public async UnauthenticatedUserUnauthorizedRequest(updatedBook: Book) {
-        const response: ServerResponse = await this.requestHandler.putRequest(UserRole.UNAUTHENTICATED, EndPoint.UPDATEBOOK, updatedBook,updatedBook.id);
+        const response: ServerResponse = await this.requestHandler.putRequest(UserRole.UNAUTHORIZED, EndPoint.UPDATEBOOK, updatedBook,updatedBook.id);
         expect(response.status).toBe(ResponseStatusCode.FORBIDDEN);
         console.log(`User unauthorized to update book: ${updatedBook.id}`);
     }
