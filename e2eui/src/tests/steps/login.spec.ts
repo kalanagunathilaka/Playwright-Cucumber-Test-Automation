@@ -8,6 +8,7 @@ Given('Navigate to the login page', async function () {
     await login.verifyLoginPage();
 });
 
+
 When('User submit the login form with valid credentials', async function () {
     console.log('\nUser submit the login form with valid credentials');
     await login.loginWithValidCredentials();

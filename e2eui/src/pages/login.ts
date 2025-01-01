@@ -9,6 +9,7 @@ import { HeaderLocators } from '../locators/headerLocator';
 
 
 export class Login {
+    
     private page: Page = undefined as unknown as Page;
     private playwrightConfig: PlaywrightConfig;
     private dataFactory: DataFactory;
@@ -26,6 +27,8 @@ export class Login {
         await this.verifyLoginPage();
         await this.loginWithValidCredentials();
         await this.verifyLoggedInSuccessfully();
+
+        
     }
 
     public async verifyLoginPage(): Promise<void> {
@@ -66,6 +69,22 @@ export class Login {
         this.dataFactory.setData("loginData.isLoggedIn", true);
 
         console.log('User logged in successfully');
+    }
+
+    public async verifyNotLoggedIn():Promise<void> {
+        const data = this.dataFactory.getData();
+        this.page = await this.playwrightConfig.getPage();
+        
+            if(data.loginData.isLoggedIn){
+                console.log('User is already logged in');
+                console.log('Logging out user');
+                await this.logout();
+            }else{
+                await expect(this.page.locator(HeaderLocators.LOGIN)).toBeVisible();
+                console.log('User Not logged in');
+            }
+        
+        console.log('User Not logged in');
     }
 
     public async logout(): Promise<void> {

@@ -1,5 +1,6 @@
 import { After, AfterAll, BeforeAll, setDefaultTimeout } from "@cucumber/cucumber";
 import { PlaywrightConfig } from "../../utils/playwrightConfig";
+import { Url } from "../../data/enum/Urls";
 
 setDefaultTimeout(2 * 60 * 1000);
 const playwrightConfig: PlaywrightConfig = PlaywrightConfig.getInstance();
@@ -13,6 +14,7 @@ BeforeAll(async function () {
 });
 
 AfterAll(async function () {
+ 
     await playwrightConfig.closePage();
     console.log('Global Wrapup: Closing Playwright browser and context...');
     console.log('***********************************************************');
