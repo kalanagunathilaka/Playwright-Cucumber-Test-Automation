@@ -50,12 +50,11 @@ export class Cart {
       author: null,
       category: null,
     };
+    //wait for add to cart button
+    await this.page.waitForSelector(HomePageLocators.HomePageFirstAddToCartButton,{state: "visible"});
 
     //click add to cart button in Book card
-    await this.page
-      .locator(HomePageLocators.HomePageAddToCartButtons)
-      .first()
-      .click();
+    await this.page.locator(HomePageLocators.HomePageFirstAddToCartButton).click();
 
     console.log(`Book added to cart: ${book.title} - ${book.price}`);
     return book;
