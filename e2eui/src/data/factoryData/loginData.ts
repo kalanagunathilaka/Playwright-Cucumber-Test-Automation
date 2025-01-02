@@ -4,7 +4,7 @@ export const loginData = {
         password: "Reformers#46",
         firstName: "Reformers",
         lastName: "Group46",
-        gender: "Male"
+        id: "3993"
     },
     invalidUserDetails: {
         userName: "InvalidUserName",
