@@ -87,6 +87,9 @@ jobs:
       working-directory: ./e2eui
       run: npm ci
 
+    - name: Install Playwright Browsers
+      run: npx playwright install
+
     - name: Run Cucumber Tests & Generate Allure Results
       working-directory: ./e2eui
       run: npx cucumber-js
