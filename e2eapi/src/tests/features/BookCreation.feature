@@ -1,4 +1,5 @@
-Feature: Create a new book
+Feature: Book Creation
 
-  Scenario: Valid Create a new book
-    Given Send Create a new book request
+  Scenario: Admin Create a valid new book
+    When Admin creates a valid new book
+    Then The book is created successfully
