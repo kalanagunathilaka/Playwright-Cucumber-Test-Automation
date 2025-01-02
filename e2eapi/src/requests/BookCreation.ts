@@ -16,7 +16,7 @@ export class BookCreation {
         this.requestHandler = new RequestHandler(this.request);
     }
 
-    public async validBookCreation() {
+    public async validBookCreation() : Promise<Book> {
         const uniqueTimestamp = new Date().getTime();
         const randomStr = `API_Test_${uniqueTimestamp}`;
     
@@ -33,7 +33,6 @@ export class BookCreation {
         expect(response.json.author).toBe(`${randomStr}_AUTHOR`);
     
         console.log(`Book : ${randomStr}_TITLE Successfully Saved.`);
-        book.id = response.json.id;
-        return book;
+        return response.json;
     }
 }
