@@ -81,3 +81,9 @@ Then(
     await cartPage.verifyBookQuantityUpdated(this.cartItem, "-");
   }
 );
+
+When("the user adds the book to cart via Item detail Page", async function () {
+  console.log("\nAdding the book to cart via Item detail page");
+  this.book = await cartPage.addBookToCartViaItemDetailPage();
+});
+
