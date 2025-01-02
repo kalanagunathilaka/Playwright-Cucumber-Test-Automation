@@ -1,4 +1,4 @@
-name: CI Pipeline for JAR and API Tests
+name: CI Pipeline for API and UI Tests
 
 on:
   push:
