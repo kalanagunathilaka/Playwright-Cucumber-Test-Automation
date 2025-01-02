@@ -31,4 +31,9 @@ export class CartLocators {
     static getCartItemQuantityIncrease(i: number|undefined): string {
         return `//tbody/tr[${i}]/td[4]/div/div[3]/button/span[3]`;
     }
+
+    static getCartItemQuantityDecrease(i: number | undefined): string {
+        return `//tbody/tr[${i}]/td[4]/div/div[1]/button/span[1]`;
+    }
+    
 }

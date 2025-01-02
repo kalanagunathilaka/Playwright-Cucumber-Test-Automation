@@ -37,4 +37,12 @@ Scenario: Authenticated user checks out the cart
     Given the user adds the book to cart via Home page
     When the user checks out the cart
     Then the cart should be redirected to the checkout page 
+
+
+
+Scenario: Authenticated user successfully decrease the quantity of a book in cart
+    Given an user has logged in 
+    Given the user adds the book to cart via Home page  
+    When the user decrease the quantity of the book in cart
+    Then the quantity of the book should be decrease successfully
  

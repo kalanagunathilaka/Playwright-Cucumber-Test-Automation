@@ -263,4 +263,47 @@ export class Cart {
             return true;
         }
     }
+
+    public async decreaseQuantityOfBookInCart(book: Book): Promise<CartItem> {
+        this.page = await this.playwrightConfig.getPage();
+        await this.page.goto(Url.CART);
+        await this.page.waitForSelector(CartLocators.CartTitle, {
+            state: "visible",
+        });
+        await this.page.waitForSelector(CartLocators.CartRow);
+
+        let matchingRow = await this.findMatchingRow(book);
+        const rowTitle = await this.page
+            .locator(CartLocators.getCartItemTitle(matchingRow))
+            .textContent();
+        const rowQuantity = await this.page
+            .locator(CartLocators.getCartItemQuantity(matchingRow))
+            .textContent();
+        const rowTotalPrice = await this.page
+            .locator(CartLocators.getCartItemTotalPrice(matchingRow))
+            .textContent();
+
+        console.log(
+            `${rowTitle} Book quantity - ${rowQuantity} & Total Price - ${rowTotalPrice}`
+        );
+
+        const cartItem: CartItem = {
+            book: book,
+            quantity: rowQuantity ? parseInt(rowQuantity) : 0,
+            total: rowTotalPrice ? parseInt(rowTotalPrice) : 0,
+        };
+
+        await this.page
+            .locator(CartLocators.getCartItemQuantityDecrease(matchingRow))
+            .click();
+        await this.page.waitForTimeout(1000);
+        console.log(
+            `Book quantity increased in cart: ${book.title} - ${book.price}`
+        );
+        return cartItem;
+    }
+
+  
+    
+
 }

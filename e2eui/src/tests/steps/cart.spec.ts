@@ -69,3 +69,15 @@ When("the user checks out the cart", async function () {
 Then("the cart should be redirected to the checkout page", async function () {
   await cartPage.verifyCartRedirectedToCheckout();
 });
+
+
+When("the user decrease the quantity of the book in cart", async function () {
+  this.cartItem = await cartPage.decreaseQuantityOfBookInCart(this.book);
+});
+
+Then(
+  "the quantity of the book should be decrease successfully",
+  async function () {
+    await cartPage.verifyBookQuantityUpdated(this.cartItem, "-");
+  }
+);
