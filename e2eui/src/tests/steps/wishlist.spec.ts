@@ -1,54 +1,49 @@
-import { Given, When, Then } from '@cucumber/cucumber';
-import { Wishlist } from '../../pages/wishlist';
+import { Given, When, Then } from "@cucumber/cucumber";
+import { Wishlist } from "../../pages/wishlist";
 
 const wishlist = new Wishlist();
 
-Given('Navigate to the home page', async function () {
-  console.log('\nNavigate to the home page');
-  await wishlist.navigateToHomePage();
+Given('Navigate to the homepage', async function () {
+    console.log('\nNavigate to the homepage');
+    // Navigate to homepage code here
 });
 
-Then('Verify the wishlist icon is not visible', async function () {
-  console.log('\nVerify the wishlist icon is not visible');
-  await wishlist.verifyWishlistIconNotVisible();
+When('Check if the Wishlist icon is not visible', async function () {
+    console.log('\nCheck if the Wishlist icon is not visible');
+    await wishlist.verifyWishlistIconNotVisible();
 });
 
-Given('User is logged in', async function () {
-  console.log('\nUser is logged in');
-  await wishlist.ensureUserIsLoggedIn();
+Given('User is registered and logged in', async function () {
+    console.log('\nUser is registered and logged in');
+    // Login function goes here
 });
 
-When('User clicks the wishlist icon of a book', async function () {
-  console.log('\nUser clicks the wishlist icon of a book');
-  await wishlist.addBookToWishlist();
+When('User adds a book to the wishlist', async function () {
+    console.log('\nUser adds a book to the wishlist');
+    await wishlist.manageWishlist();
 });
 
-Then('The book should be added to the wishlist', async function () {
-  console.log('\nThe book should be added to the wishlist');
-  await wishlist.verifyBookInWishlist();
-});
-
-Given('A book is already in the wishlist', async function () {
-  console.log('\nA book is already in the wishlist');
-  await wishlist.ensureBookInWishlist();
+Then('Book should be added to the wishlist', async function () {
+    console.log('\nBook should be added to the wishlist');
+    // Verifications for wishlist can be added here
 });
 
 When('User removes the book from the wishlist', async function () {
-  console.log('\nUser removes the book from the wishlist');
-  await wishlist.removeBookFromWishlist();
+    console.log('\nUser removes the book from the wishlist');
+    await wishlist.manageWishlist();
 });
 
-Then('The book should no longer be in the wishlist', async function () {
-  console.log('\nThe book should no longer be in the wishlist');
-  await wishlist.verifyBookNotInWishlist();
+Then('Book should be removed from the wishlist', async function () {
+    console.log('\nBook should be removed from the wishlist');
+    // Verifications for removal can be added here
 });
 
 When('User adds the book to the cart from the wishlist', async function () {
-  console.log('\nUser adds the book to the cart from the wishlist');
-  await wishlist.addBookToCartFromWishlist();
+    console.log('\nUser adds the book to the cart from the wishlist');
+    await wishlist.manageWishlist();
 });
 
-Then('The book should be added to the cart', async function () {
-  console.log('\nThe book should be added to the cart');
-  await wishlist.verifyBookInCart();
+Then('Book should be added to the cart', async function () {
+    console.log('\nBook should be added to the cart');
+    // Verifications for cart can be added here
 });

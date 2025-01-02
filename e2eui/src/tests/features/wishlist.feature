@@ -1,20 +1,15 @@
-Feature: Wishlist Functionality
+Feature: Wishlist functionality after registration
 
-  Scenario: Verify wishlist icon is not visible before registering
-    Given Navigate to the home page
-    Then Verify the wishlist icon is not visible
+  Scenario: Before Registration, Wishlist icon shouldn't be visible
+    Given Navigate to the homepage
+    When Check if the Wishlist icon is not visible
+    Then Wishlist icon should not be visible
 
-  Scenario: Add a book to the wishlist after registering
-    Given User is logged in
-    When User clicks the wishlist icon of a book
-    Then The book should be added to the wishlist
-
-  Scenario: Remove a book from the wishlist
-    Given A book is already in the wishlist
+  Scenario: After Registration, Add Book to Wishlist, Remove and Add to Cart
+    Given User is registered and logged in
+    When User adds a book to the wishlist
+    Then Book should be added to the wishlist
     When User removes the book from the wishlist
-    Then The book should no longer be in the wishlist
-
-  Scenario: Add a book to the cart from the wishlist
-    Given A book is already in the wishlist
+    Then Book should be removed from the wishlist
     When User adds the book to the cart from the wishlist
-    Then The book should be added to the cart
+    Then Book should be added to the cart
