@@ -1,22 +1,22 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","604","User login with invalid credentials","","Thu Jan 02 11:42:15 UTC 2025","passed","Thu Jan 02 11:42:15 UTC 2025","","","",""
 "As a Authenticated and Unauthenticated user
  I want to test cart functionality
- So that I can validate the behavior for different roles and scenarios","4883","Authenticated user successfully increase the quantity of a book in cart","","Thu Jan 02 05:51:17 UTC 2025","passed","Thu Jan 02 05:51:22 UTC 2025","","","",""
-"","581","User login with valid credentials","","Thu Jan 02 05:51:29 UTC 2025","passed","Thu Jan 02 05:51:30 UTC 2025","","","",""
+ So that I can validate the behavior for different roles and scenarios","3582","Authenticated user clears the cart","","Thu Jan 02 11:42:07 UTC 2025","passed","Thu Jan 02 11:42:11 UTC 2025","","","",""
 "As a Authenticated and Unauthenticated user
  I want to test cart functionality
- So that I can validate the behavior for different roles and scenarios","4616","Authenticated user successfully removes a book from cart","","Thu Jan 02 05:51:12 UTC 2025","passed","Thu Jan 02 05:51:17 UTC 2025","","","",""
-"","599","User login with invalid credentials","","Thu Jan 02 05:51:30 UTC 2025","passed","Thu Jan 02 05:51:30 UTC 2025","","","",""
-"","2849","User registration with valid data","","Thu Jan 02 05:51:30 UTC 2025","passed","Thu Jan 02 05:51:33 UTC 2025","","","",""
+ So that I can validate the behavior for different roles and scenarios","3280","UnAuthenticated user successfully adds a book to cart via Home page","","Thu Jan 02 11:41:54 UTC 2025","passed","Thu Jan 02 11:41:58 UTC 2025","","","",""
 "As a Authenticated and Unauthenticated user
  I want to test cart functionality
- So that I can validate the behavior for different roles and scenarios","3280","UnAuthenticated user successfully adds a book to cart via Home page","","Thu Jan 02 05:51:09 UTC 2025","passed","Thu Jan 02 05:51:12 UTC 2025","","","",""
+ So that I can validate the behavior for different roles and scenarios","4901","Authenticated user successfully increase the quantity of a book in cart","","Thu Jan 02 11:42:02 UTC 2025","passed","Thu Jan 02 11:42:07 UTC 2025","","","",""
 "As a Authenticated and Unauthenticated user
  I want to test cart functionality
- So that I can validate the behavior for different roles and scenarios","4549","Authenticated user successfully adds a book to cart via Home page","","Thu Jan 02 05:51:05 UTC 2025","passed","Thu Jan 02 05:51:09 UTC 2025","","","",""
+ So that I can validate the behavior for different roles and scenarios","4614","Authenticated user successfully removes a book from cart","","Thu Jan 02 11:41:58 UTC 2025","passed","Thu Jan 02 11:42:02 UTC 2025","","","",""
+"","577","User login with valid credentials","","Thu Jan 02 11:42:14 UTC 2025","passed","Thu Jan 02 11:42:15 UTC 2025","","","",""
+"","2778","User registration with valid data","","Thu Jan 02 11:42:15 UTC 2025","passed","Thu Jan 02 11:42:18 UTC 2025","","","",""
 "As a Authenticated and Unauthenticated user
  I want to test cart functionality
- So that I can validate the behavior for different roles and scenarios","3503","Authenticated user checks out the cart","","Thu Jan 02 05:51:25 UTC 2025","passed","Thu Jan 02 05:51:29 UTC 2025","","","",""
+ So that I can validate the behavior for different roles and scenarios","3523","Authenticated user checks out the cart","","Thu Jan 02 11:42:11 UTC 2025","passed","Thu Jan 02 11:42:14 UTC 2025","","","",""
 "As a Authenticated and Unauthenticated user
  I want to test cart functionality
- So that I can validate the behavior for different roles and scenarios","3581","Authenticated user clears the cart","","Thu Jan 02 05:51:22 UTC 2025","passed","Thu Jan 02 05:51:25 UTC 2025","","","",""
+ So that I can validate the behavior for different roles and scenarios","5973","Authenticated user successfully adds a book to cart via Home page","","Thu Jan 02 11:41:48 UTC 2025","passed","Thu Jan 02 11:41:54 UTC 2025","","","",""
