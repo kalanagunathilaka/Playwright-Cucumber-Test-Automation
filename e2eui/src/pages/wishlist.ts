@@ -16,33 +16,61 @@ export class Wishlist {
         this.dataFactory = DataFactory.getInstance();
     }
 
-    // Check if the wishlist icon is visible before registration
+    // 
+
+    // Check if the wishlist icon is visible after registration
     public async verifyWishlistIconNotVisible(): Promise<void> {
         this.page = await this.playwrightConfig.getPage();
-        await expect(this.page.locator(WishlistLocators.WISHLIST_ICON)).toBeHidden();
-        console.log('Wishlist icon is not visible before registration');
+        await expect(this.page.locator(WishlistLocators.WISHLIST_ICON)).toBeVisible({ timeout: 10000 });
+        console.log('Wishlist icon is visible after registration');
     }
 
-    // After registration, add book to wishlist, remove from wishlist, and add to cart
-    public async manageWishlist(): Promise<void> {
+    // Add book to wishlist
+    public async addBookToWishlist(): Promise<void> {
         this.page = await this.playwrightConfig.getPage();
-        
-        // Add book to wishlist
         await this.page.click(WishlistLocators.ADD_TO_WISHLIST_BUTTON);
         this.dataFactory.setData("wishlistData.isBookAddedToWishlist", true);
         console.log('Book added to wishlist');
+    }
 
-        // Verify that the book is added to the wishlist
+    // Verify that the book is added to the wishlist
+    public async verifyBookAddedToWishlist(): Promise<void> {
+        this.page = await this.playwrightConfig.getPage();
+        await this.page.click(HeaderLocators.WISH_LIST);
         await expect(this.page.locator(WishlistLocators.WISHLIST_ICON)).toBeVisible();
         console.log('Wishlist icon is visible after adding book to wishlist');
+    }
 
-        // Remove book from wishlist
+    // Remove book from wishlist  
+    public async removeBookFromWishlist(): Promise<void> {
+        this.page = await this.playwrightConfig.getPage();
         await this.page.click(WishlistLocators.REMOVE_FROM_WISHLIST_BUTTON);
-        this.dataFactory.setData("wishlistData.isBookAddedToWishlist", false);
+        this.dataFactory.setData("wishlistData.isBookRemovedFromWishlist", true);
         console.log('Book removed from wishlist');
+    }
 
-        // Add book to cart from wishlist
+    // Verify that the book is removed from the wishlist
+    public async verifyBookRemovedFromWishlist(): Promise<void> {
+        this.page = await this.playwrightConfig.getPage();
+        
+        await expect(this.page.locator(WishlistLocators.WISHLIST_ICON)).not.toBeVisible({timeout:10000});
+        console.log('Wishlist icon is not visible after removing book from wishlist');
+    }
+
+    // Add book to cart from wishlist
+    public async addBookToCartFromWishlist(): Promise<void> {
+        this.page = await this.playwrightConfig.getPage();
         await this.page.click(WishlistLocators.ADD_TO_CART_FROM_WISHLIST_BUTTON);
         console.log('Book added to cart from wishlist');
     }
+
+    // Verify that the book is added to the cart
+    public async verifyBookAddedToCart(): Promise<void> {
+        this.page = await this.playwrightConfig.getPage();
+        await expect(this.page.locator(WishlistLocators.ADD_TO_CART_FROM_WISHLIST_BUTTON)).toBeVisible();
+        console.log('Book added to cart from wishlist');
+    }
+    
+
+    
 }
