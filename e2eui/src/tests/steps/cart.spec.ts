@@ -48,7 +48,7 @@ When("the user increase the quantity of the book in cart", async function () {
 });
 
 Then(
-  "the quantity of the book should be updated successfully",
+  "the quantity of the book should be increased successfully",
   async function () {
     await cartPage.verifyBookQuantityUpdated(this.cartItem, "+");
   }
