@@ -138,18 +138,14 @@ jobs:
         cp -r allure-results-api/* combined-results/
         cp -r allure-results-ui/* combined-results/
 
-    - name: Debug Combined Results Directory
-      run: ls -R combined-results
 
     - name: Generate Combined Allure Report
-      run: allure generate combined-results --clean --output=combined-report
+      run: allure generate combined-results --clean 
 
-    - name: Debug Combined Report Directory
-      run: ls -R combined-report
 
     - name: Deploy Combined Allure Report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: combined-report
+        publish_dir: allure-report
         keep_files: false
