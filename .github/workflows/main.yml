@@ -90,9 +90,12 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install
 
+    - name: Install xvfb
+      run: sudo apt-get install -y xvfb
+
     - name: Run Cucumber Tests & Generate Allure Results
       working-directory: ./e2eui
-      run: npx cucumber-js
+      run: xvfb-run npx cucumber-js npx cucumber-js
       continue-on-error: true
 
 
