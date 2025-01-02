@@ -55,11 +55,15 @@ jobs:
       run: npx cucumber-js
       continue-on-error: true
 
+    - name: Generate Allure Report
+      working-directory: ./e2eapi
+      run: npx allure generate allure-results --clean
+
     - name: Upload Allure Results as Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: allure-results-api
-        path: ./e2eapi/allure-results
+        name: allure-report-api
+        path: ./e2eapi/allure-report
 
   test-uis:
     runs-on: ubuntu-latest
@@ -99,11 +103,15 @@ jobs:
       continue-on-error: true
 
 
+    - name: Generate Allure Report
+      working-directory: ./e2eui
+      run: npx allure generate allure-results --clean
+
     - name: Upload Allure Results as Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: allure-results-ui
-        path: ./e2eui/allure-results
+        name: allure-report-ui
+        path: ./e2eui/allure-report
  
   deploy-allure:
     runs-on: ubuntu-latest
@@ -116,36 +124,26 @@ jobs:
     - name: Download Allure API Results Artifact
       uses: actions/download-artifact@v3
       with:
-        name: allure-results-api
-        path: allure-results-api
+        name: allure-report-api
+        path: allure-report-api
 
     - name: Download Allure UI Results Artifact
       uses: actions/download-artifact@v3
       with:
-        name: allure-results-ui
-        path: allure-results-ui
+        name: allure-report-ui
+        path: allure-report-ui
 
-    - name: Install Allure Commandline
+
+    - name: Prepare Deployment Directories
       run: |
-        wget https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
-        tar -zxvf allure-2.32.0.tgz
-        sudo mv allure-2.32.0 /opt/allure
-        sudo ln -s /opt/allure/bin/allure /usr/local/bin/allure
+        mkdir -p deployment/api-report
+        mkdir -p deployment/ui-report
+        cp -r allure-report-api/* deployment/api-report/
+        cp -r allure-report-ui/* deployment/ui-report/
 
-    - name: Merge Allure Results
-      run: |
-        mkdir combined-results
-        cp -r allure-results-api/* combined-results/
-        cp -r allure-results-ui/* combined-results/
-
-
-    - name: Generate Combined Allure Report
-      run: allure generate combined-results --clean 
-
-
-    - name: Deploy Combined Allure Report to GitHub Pages
+    - name: Deploy Allure Reports to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: allure-report
+        publish_dir: deployment
         keep_files: false
