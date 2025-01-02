@@ -129,20 +129,21 @@ jobs:
       run: |
         wget https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
         tar -zxvf allure-2.32.0.tgz
-        sudo mv allure-2.32.0 /usr/local/bin/allure
+        sudo mv allure-2.32.0 /opt/allure
+        sudo ln -s /opt/allure/bin/allure /usr/local/bin/allure
 
     - name: Merge Allure Results
       run: |
-       mkdir combined-results
-       cp -r allure-results-api/* combined-results/
-       cp -r allure-results-ui/* combined-results/
+        mkdir combined-results
+        cp -r allure-results-api/* combined-results/
+        cp -r allure-results-ui/* combined-results/
 
     - name: Generate Combined Allure Report
-      run: /usr/local/bin/allure generate combined-results --clean --output=combined-report
+      run: allure generate combined-results --clean --output=combined-report
 
     - name: Deploy Allure Report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
-       github_token: ${{ secrets.GITHUB_TOKEN }}
-       publish_dir: combined-report
-       keep_files: false
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: combined-report
+        keep_files: false
