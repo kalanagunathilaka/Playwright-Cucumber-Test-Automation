@@ -142,4 +142,22 @@ export class Login {
 
         console.log('Error message displayed successfully');
     }
+
+        // Verify that the user is not logged in
+        public async verifyUserIsNotLoggedIn() {
+            this.page = await this.playwrightConfig.getPage();
+            const isLoggedIn = await this.pageHelper.verifyUserIsLoggedIn();
+            if (isLoggedIn) {
+                await this.logout(true);
+            }
+        }
+    
+        // Verify that the user is logged in
+        public async verifyUserIsLoggedIn() {
+            this.page = await this.playwrightConfig.getPage();
+            const isLoggedIn = await this.pageHelper.verifyUserIsLoggedIn();
+            if (!isLoggedIn) {
+                await this.login();
+            }
+        }
 }

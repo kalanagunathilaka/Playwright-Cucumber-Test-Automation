@@ -26,39 +26,7 @@ export class Cart {
         this.pageHelper = new PageHelper();
     }
 
-    public async addBookToCartViaHomePage(): Promise<Book> {
-        this.page = await this.playwrightConfig.getPage();
-        const data = this.dataFactory.getData();
-        await this.page.goto(Url.BASEURL);
-
-        
-
-        //verify Home page
-        await Promise.all([
-            expect(this.page.locator(HomePageLocators.FilterTitle).getByText("Price Filter")).toBeVisible(),
-            expect(this.page).toHaveURL(Url.BASEURL)
-        ]);
-        //get book details from Book card
-      
-        await this.page.locator(HomePageLocators.BookCardTitle).nth(0).waitFor({ state: 'visible' });
-        const book: Book = {
-            title :await this.page.locator(HomePageLocators.BookCardTitle).nth(0).textContent(),
-            price : await this.page.locator(HomePageLocators.BookCardPrice).nth(0).textContent(),
-            author: null,
-            category: null,
-        };
-        //wait for add to cart button
-        await this.page.waitForSelector(HomePageLocators.HomePageFirstAddToCartButton, { state: "visible" });
-
-        //click add to cart button in Book card
-        await this.page.locator(HomePageLocators.HomePageFirstAddToCartButton).click();
-
-        await this.page.waitForTimeout(1000);
-
-
-        console.log(`Book added to cart: ${book.title} - ${book.price}`);
-        return book;
-    }
+   
 
     public async verifyItemAddedToCart(book: Book): Promise<void> {
         this.page = await this.playwrightConfig.getPage();
@@ -302,109 +270,13 @@ export class Cart {
         return cartItem;
     }
 
-    public async addBookToCartViaItemDetailPage(): Promise<Book> {
+    public async verifyBookAddedToCart(): Promise<void> {
         this.page = await this.playwrightConfig.getPage();
-        const data = this.dataFactory.getData();
-        await this.page.goto(Url.BASEURL);
-    
-        // Verify Home Page
-        await Promise.all([
-            expect(this.page.locator(HomePageLocators.FilterTitle).getByText("Price Filter")).toBeVisible(),
-            expect(this.page).toHaveURL(Url.BASEURL),
-            expect(this.page.locator(HomePageLocators.BookCard).first()).toBeVisible(),
-        ]);
-    
-        // Click on the first book's title to navigate to the Item Detail Page
-        const firstBookCard = this.page.locator(HomePageLocators.BookCard).first();
-        await firstBookCard.locator(HomePageLocators.BookCardTitle).click();
-    
-        // Wait for Item Detail Page to load and verify
-        await this.page.waitForSelector(ItemDetailPageLocators.Title, { state: "visible" });
 
-        
-        const book: Book = {
-            title: await this.page.locator(ItemDetailPageLocators.Title).textContent(),
-            author: await this.page.locator(ItemDetailPageLocators.Author).textContent(),
-            category: await this.page.locator(ItemDetailPageLocators.Category).textContent(),
-            price: await this.page.locator(ItemDetailPageLocators.Price).textContent(),
-        };
-    
-        // Click the "Add to Cart" button
-        await this.page.waitForSelector(ItemDetailPageLocators.AddToCartButton, { state: "visible" });
-        await this.page.locator(ItemDetailPageLocators.AddToCartButton).first().click();
-       
-    
-        await this.page.waitForTimeout(1000);
-    
-        console.log(`Book added to cart from Item Detail Page: ${book.title} - ${book.price}`);
-        return book;
+        const book: Book = this.dataFactory.getData().wishlistData.bookDetails;
+        await this.verifyItemAddedToCart(book);
+        console.log('Verified that the book is added to the cart');
     }
 
-    // public async selectTwoRandomBooksFromHomePage(): Promise<Book[]> {
-    //     this.page = await this.playwrightConfig.getPage();
-    //     await this.page.goto(Url.BASEURL);
-      
-    //     // Verify Home Page
-    //     await Promise.all([
-    //       expect(this.page.locator(HomePageLocators.FilterTitle).getByText("Price Filter")).toBeVisible(),
-    //       expect(this.page).toHaveURL(Url.BASEURL),
-    //       expect(this.page.locator(HomePageLocators.BookCard)).toBeVisible(),
-    //     ]);
-      
-    //     // Get the total number of books displayed on the home page
-    //     const totalBooks = await this.page.locator(HomePageLocators.BookCard).count();
-      
-    //     // Select two random indices
-    //     const randomIndices = Array.from({ length: 2 }, () =>
-    //       Math.floor(Math.random() * totalBooks)
-    //     );
-      
-    //     const selectedBooks: Book[] = [];
-      
-    //     for (const index of randomIndices) {
-    //       const bookCard = this.page.locator(HomePageLocators.BookCard).nth(index);
-      
-    //       // Click on the book's title to navigate to the Item Detail Page
-    //       await bookCard.locator(HomePageLocators.BookCardTitle).click();
-      
-    //       // Wait for Item Detail Page to load and capture details
-    //       await this.page.waitForSelector(ItemDetailPageLocators.Title, { state: "visible" });
-      
-    //       const book: Book = {
-    //         title: await this.page.locator(ItemDetailPageLocators.Title).textContent(),
-    //         author: await this.page.locator(ItemDetailPageLocators.Author).textContent(),
-    //         category: await this.page.locator(ItemDetailPageLocators.Category).textContent(),
-    //         price: await this.page.locator(ItemDetailPageLocators.Price).textContent(),
-    //       };
-      
-    //       console.log(`Book selected: ${book.title} - ${book.price}`);
-    //       selectedBooks.push(book);
-      
-    //       // Navigate back to the home page
-    //       await this.page.goto(Url.BASEURL);
-    //     }
-      
-    //     return selectedBooks;
-    //   }
-
-    //   public async verifyBookDetails(expectedBook: Book): Promise<void> {
-    //     const title = await this.page.locator(ItemDetailPageLocators.Title).textContent();
-    //     const author = await this.page.locator(ItemDetailPageLocators.Author).textContent();
-    //     const category = await this.page.locator(ItemDetailPageLocators.Category).textContent();
-    //     const price = await this.page.locator(ItemDetailPageLocators.Price).textContent();
-      
-    //     expect(title).toBe(expectedBook.title);
-    //     expect(author).toBe(expectedBook.author);
-    //     expect(category).toBe(expectedBook.category);
-    //     expect(price).toBe(expectedBook.price);
-      
-    //     console.log(`Verified details for book: ${expectedBook.title}`);
-     // }
-      
-      
-    
-
-  
-    
-
+   
 }

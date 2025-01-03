@@ -3,19 +3,11 @@ import { Wishlist } from "../../pages/wishlist";
 
 const wishlist = new Wishlist();
 
-Given('User is not logged in', async function () {
-    console.log('\nCheck if the user is not logged in');
-    await wishlist.verifyUserIsNotLoggedIn();
-});
+
 
 Then('Wishlist icon should not be visible', async function () {
     console.log('\nCheck if the Wishlist icon is not visible');
     await wishlist.verifyWishlistIconNotVisible();
-});
-
-Given('User is logged in', async function () {
-    console.log('\nCheck if the user is logged in');
-    await wishlist.verifyUserIsLoggedIn();
 });
 
 When('User adds a book to the wishlist', async function () {
@@ -52,7 +44,3 @@ When('User adds the book to the cart from the wishlist', async function () {
     await wishlist.addBookToCartFromWishlist();
 });
 
-Then('Book should be added to the cart', async function () {
-    console.log('\nCheck if the book is added to the cart');
-    await wishlist.verifyBookAddedToCart();
-});
