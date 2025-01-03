@@ -1,5 +1,6 @@
 Feature: User Registration
 
+  @UI-TC-25
   Scenario: User registration with valid data
     Given Navigate to the User Registration Page
     When User Submit the registration form with valid data
