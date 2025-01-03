@@ -39,13 +39,13 @@ When('Admin creates the same book again', async function () {
 
 When('Admin creates a book with CustomID', async function () {
     console.log('\nAdmin creates a book with CustomID');
-    const customID = new Date().getTime();
+    this.customID = new Date().getTime();
     const bookCreation: BookCreation = new BookCreation(this.context);
-    await bookCreation.validBookCreation(UserRole.ADMIN, customID);
+    await bookCreation.validBookCreation(UserRole.ADMIN, this.customID);
 });
 
-Then('Response id should be equal to CustomID', async function () {
-    console.log('\nResponse id should be equal to CustomID');
+Then('Response book id should be equal to CustomID', async function () {
+    console.log('\nResponse book id should be equal to CustomID');
     const bookRetrieval: BookRetrieval = new BookRetrieval(this.context);
     await bookRetrieval.getBookAdminValid(this.customID);
 });

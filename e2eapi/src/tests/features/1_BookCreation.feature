@@ -33,7 +33,7 @@ Feature: Book Creation
   @kalana
   Scenario: Admin Create a book with CustomID
     When Admin creates a book with CustomID
-    Then Response id should be equal to CustomID
+    Then Response book id should be equal to CustomID
     # Then The book sould be created successfully
   
 
