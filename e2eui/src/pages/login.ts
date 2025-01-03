@@ -146,6 +146,7 @@ export class Login {
         // Verify that the user is not logged in
         public async verifyUserIsNotLoggedIn() {
             this.page = await this.playwrightConfig.getPage();
+            // await this.page.pause();
             const isLoggedIn = await this.pageHelper.verifyUserIsLoggedIn();
             if (isLoggedIn) {
                 await this.logout(true);

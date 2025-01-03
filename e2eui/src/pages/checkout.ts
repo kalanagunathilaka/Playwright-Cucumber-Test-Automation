@@ -4,11 +4,13 @@ import { expect } from "playwright/test";
 import { CheckoutLocators } from "../locators/checkoutLocators";
 import { Url } from "../data/enum/Urls";
 import { DataFactory } from "../utils/dataFactory";
+import { CartLocators } from "../locators/cartLocators";
 
 export class Checkout {
+
   private page: Page = undefined as unknown as Page;
   private playwrightConfig: PlaywrightConfig;
-   private dataFactory: DataFactory;
+  private dataFactory: DataFactory;
 
   constructor() {
     this.playwrightConfig = PlaywrightConfig.getInstance();
@@ -27,39 +29,46 @@ export class Checkout {
   public async fillCheckoutDetails(): Promise<void> {
     const data = this.dataFactory.getData();
     this.page = await this.playwrightConfig.getPage();
-    const { name, address1,address2,pincode,state } = data.checkoutData.checkoutDetails;    
-     await this.page.fill(CheckoutLocators.NameField, name);
-     await this.page.fill(CheckoutLocators.AddressField1, address1);
-     await this.page.fill(CheckoutLocators.AddressField2, address2);
-     await this.page.fill(CheckoutLocators.PincodeField,pincode);
-     await this.page.fill(CheckoutLocators.StateField,state);
+    const { name, address1, address2, pincode, state } = data.checkoutData.checkoutDetails;
+    await this.page.fill(CheckoutLocators.NameField, name);
+    await this.page.fill(CheckoutLocators.AddressField1, address1);
+    await this.page.fill(CheckoutLocators.AddressField2, address2);
+    await this.page.fill(CheckoutLocators.PincodeField, pincode);
+    await this.page.fill(CheckoutLocators.StateField, state);
     console.log("Filled checkout details");
   }
 
   public async emptyCheckoutDetails(): Promise<void> {
     const data = this.dataFactory.getData();
     this.page = await this.playwrightConfig.getPage();
-    const { name, address1,address2,pincode,state } = data.checkoutData.emptycheckoutDetails;    
-     await this.page.fill(CheckoutLocators.NameField, name);
-     await this.page.fill(CheckoutLocators.AddressField1, address1);
-     await this.page.fill(CheckoutLocators.AddressField2, address2);
-     await this.page.fill(CheckoutLocators.PincodeField,pincode);
-     await this.page.fill(CheckoutLocators.StateField,state);
+    const { name, address1, address2, pincode, state } = data.checkoutData.emptycheckoutDetails;
+    await this.page.fill(CheckoutLocators.NameField, name);
+    await this.page.fill(CheckoutLocators.AddressField1, address1);
+    await this.page.fill(CheckoutLocators.AddressField2, address2);
+    await this.page.fill(CheckoutLocators.PincodeField, pincode);
+    await this.page.fill(CheckoutLocators.StateField, state);
     console.log("empty checkout details");
   }
 
   public async invalidCheckoutDetailsPincode(): Promise<void> {
     const data = this.dataFactory.getData();
     this.page = await this.playwrightConfig.getPage();
-    const { name, address1,address2,pincode,state } = data.checkoutData.invalidcheckoutDetailsPincode;    
-     await this.page.fill(CheckoutLocators.NameField, name);
-     await this.page.fill(CheckoutLocators.AddressField1, address1);
-     await this.page.fill(CheckoutLocators.AddressField2, address2);
-     await this.page.fill(CheckoutLocators.PincodeField,pincode);
-     await this.page.fill(CheckoutLocators.StateField,state);
+    const { name, address1, address2, pincode, state } = data.checkoutData.invalidcheckoutDetailsPincode;
+    await this.page.fill(CheckoutLocators.NameField, name);
+    await this.page.fill(CheckoutLocators.AddressField1, address1);
+    await this.page.fill(CheckoutLocators.AddressField2, address2);
+    await this.page.fill(CheckoutLocators.PincodeField, pincode);
+    await this.page.fill(CheckoutLocators.StateField, state);
     console.log("invalid checkout details for pincode");
   }
   public async placeOrder(): Promise<void> {
+
+    this.page = await this.playwrightConfig.getPage();
+
+    await this.page.waitForSelector(CheckoutLocators.CheckoutTitle, {
+      state: "visible",
+    });
+
     await this.page.click(CheckoutLocators.PlaceOrderButton);
     console.log("Clicked on Place Order button");
   }
@@ -86,7 +95,7 @@ export class Checkout {
     const errorMessagePincode = await this.page
       .locator(CheckoutLocators.ErrorMessagePincode)
       .textContent();
-      expect(errorMessagePincode).toEqual(expectedError);
+    expect(errorMessagePincode).toEqual(expectedError);
     console.log(`Error message verified: ${expectedError}`);
   }
 
@@ -105,13 +114,25 @@ export class Checkout {
 
   public async viewOrderHistory(): Promise<void> {
     this.page = await this.playwrightConfig.getPage();
+
     await this.page.goto(Url.ORDER_HISTORY);
+
+    await this.page.waitForSelector(CheckoutLocators.MyOrderTitle, {
+      state: "visible",
+    });
+
     console.log("Navigated to Order History page");
   }
 
   public async verifyPastOrdersDisplayed(): Promise<void> {
-    const orders = await this.page.locator(CheckoutLocators.PastOrders).count();
-    expect(orders).toBeGreaterThan(0);
+
+    await this.page.waitForSelector(CheckoutLocators.OrderConfirmation, {
+      state: "visible",
+    });
+    const orderIdFromPage = await this.page
+      .locator(CheckoutLocators.OrderId).first()
+      .textContent();
+    expect(orderIdFromPage).not.toBeNull();
     console.log("Verified past orders are displayed");
   }
 

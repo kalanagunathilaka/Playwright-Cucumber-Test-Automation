@@ -2,21 +2,21 @@ import { Given, Then, When } from "@cucumber/cucumber";
 import { Login } from "../../pages/login";
 import { Cart } from "../../pages/cart";
 import { Checkout } from "../../pages/checkout";
+import { Homepage } from "../../pages/homepage";
 
 const login = new Login();
 const cartPage = new Cart();
 const checkoutPage = new Checkout();
+const homepage = new Homepage();
 
-Given("the user is logged in and has items in the cart", async function () {
-  await login.login();
-  console.log("\nUser has logged in");
-  this.book = await cartPage.addBookToCartViaHomePage();
+Given("the user has items in the cart", async function () {
+  await homepage.addBookToCartViaHomePage();
 });
 
-Given("the user is logged in and has placed orders in the past", async function () {
-  await login.login();
+Given("the user has placed orders in the past", async function () {
+  
   console.log("\nUser has logged in with past orders");
-  this.orderId = await checkoutPage.placeOrder();
+  await cartPage.checkoutCart();
 });
 
 Given("the user is logged in and has not placed any orders", async function () {
@@ -48,15 +48,15 @@ When("the user enters an invalid Pincode", async function () {
   await checkoutPage.invalidCheckoutDetailsPincode();
 });
 
-When("the user clicks the {string} button", async function (buttonName) {
-  console.log(`\nUser clicks the "${buttonName}" button`);
-  if (buttonName === "Place Order") {
-    this.orderId = await checkoutPage.placeOrder();
-  } else if (buttonName === "Cancel") {
-    await checkoutPage.cancelOrder();
-  } else {
-    throw new Error(`Unknown button: ${buttonName}`);
-  }
+
+When("the user clicks the Place Order button", async function () {
+  console.log("\nUser clicks the Place Order button");
+  await  await checkoutPage.placeOrder();
+});
+
+When("the user clicks the Cancel button", async function () {
+  console.log("\nUser clicks the Cancel button");
+  await  await checkoutPage.cancelOrder();
 });
 
 Then(
@@ -88,13 +88,12 @@ Then("the user should be redirected back to the cart", async function () {
   await checkoutPage.verifyRedirectedToCart();
 });
 
-When("the user navigates to the {string} page", async function (pageName) {
-  console.log(`\nNavigating to the "${pageName}" page`);
-  if (pageName === "My orders") {
+When("the user navigates to the My orders page", async function () {
+  console.log(`\nNavigating to the My orders page`);
+  
     await checkoutPage.viewOrderHistory();
-  } else {
-    throw new Error(`Unknown page: ${pageName}`);
-  }
+  
+  
 });
 
 Then("a list of past orders with order id should be displayed", async function () {

@@ -5,7 +5,7 @@ export class CartLocators {
     // static readonly PASSWORD = 'input[formcontrolname="password"]';
     // static readonly LOGIN_BUTTON = 'xpath=//button[span[text()="Login"]]';
     static readonly CartTitle= 'text=Shopping cart';
-    static readonly CartRow= '.mat-mdc-row';
+    static readonly CartRow= '.mat-mdc-row:nth-child(1)';
     static readonly ClearCartButton='.mat-elevation-z4 > .mdc-button__label';
     static readonly emptyCart= '.ng-star-inserted > .mat-mdc-card-header .mat-mdc-card-title';
     static readonly CheckoutButton = '.my-2 > .mdc-button__label';
