@@ -19,14 +19,15 @@ Given("an user has not logged in", async function () {
 When("the user adds the book to cart via Home page", async function () {
   console.log("\nAdding the book to cart via Home page");
   this.book = await cartPage.addBookToCartViaHomePage();
+  
 });
 
 Then("the same book should be added to cart successfully", async function () {
   console.log(
     "\nBook added to cart & to be Verifying... : " +
-      this.book.title +
-      " - " +
-      this.book.price
+    this.book.title +
+    " - " +
+    this.book.price
   );
   await cartPage.verifyItemAddedToCart(this.book);
 });
