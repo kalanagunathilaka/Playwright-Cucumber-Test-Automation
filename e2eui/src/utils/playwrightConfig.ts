@@ -21,7 +21,7 @@ export class PlaywrightConfig {
 
     public async getPage(): Promise<Page> {
         if (!this.page) {
-            this.browser = await chromium.launch({ headless: false });
+            this.browser = await chromium.launch({ headless: false, slowMo: 200 });
             this.context = await this.browser.newContext({
                 baseURL: this.baseUrl,
             });
