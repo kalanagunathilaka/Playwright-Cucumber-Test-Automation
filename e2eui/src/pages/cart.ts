@@ -13,6 +13,7 @@ import { CartItem } from "../models/cartItem";
 import { PageHelper } from "./helper/pageHelper";
 import { ItemDetailPageLocators } from "../locators/itemDetailPageLocators";
 
+
 export class Cart {
     private page: Page = undefined as unknown as Page;
     private playwrightConfig: PlaywrightConfig;
@@ -322,6 +323,8 @@ export class Cart {
     
         // Wait for Item Detail Page to load and verify
         await this.page.waitForSelector(ItemDetailPageLocators.Title, { state: "visible" });
+
+        
         const book: Book = {
             title: await this.page.locator(ItemDetailPageLocators.Title).textContent(),
             author: await this.page.locator(ItemDetailPageLocators.Author).textContent(),
@@ -331,7 +334,7 @@ export class Cart {
     
         // Click the "Add to Cart" button
         await this.page.waitForSelector(ItemDetailPageLocators.AddToCartButton, { state: "visible" });
-        await this.page.locator(ItemDetailPageLocators.AddToCartButton).click();
+        await this.page.locator(ItemDetailPageLocators.AddToCartButton).first().click();
        
     
         await this.page.waitForTimeout(1000);
@@ -339,6 +342,69 @@ export class Cart {
         console.log(`Book added to cart from Item Detail Page: ${book.title} - ${book.price}`);
         return book;
     }
+
+    // public async selectTwoRandomBooksFromHomePage(): Promise<Book[]> {
+    //     this.page = await this.playwrightConfig.getPage();
+    //     await this.page.goto(Url.BASEURL);
+      
+    //     // Verify Home Page
+    //     await Promise.all([
+    //       expect(this.page.locator(HomePageLocators.FilterTitle).getByText("Price Filter")).toBeVisible(),
+    //       expect(this.page).toHaveURL(Url.BASEURL),
+    //       expect(this.page.locator(HomePageLocators.BookCard)).toBeVisible(),
+    //     ]);
+      
+    //     // Get the total number of books displayed on the home page
+    //     const totalBooks = await this.page.locator(HomePageLocators.BookCard).count();
+      
+    //     // Select two random indices
+    //     const randomIndices = Array.from({ length: 2 }, () =>
+    //       Math.floor(Math.random() * totalBooks)
+    //     );
+      
+    //     const selectedBooks: Book[] = [];
+      
+    //     for (const index of randomIndices) {
+    //       const bookCard = this.page.locator(HomePageLocators.BookCard).nth(index);
+      
+    //       // Click on the book's title to navigate to the Item Detail Page
+    //       await bookCard.locator(HomePageLocators.BookCardTitle).click();
+      
+    //       // Wait for Item Detail Page to load and capture details
+    //       await this.page.waitForSelector(ItemDetailPageLocators.Title, { state: "visible" });
+      
+    //       const book: Book = {
+    //         title: await this.page.locator(ItemDetailPageLocators.Title).textContent(),
+    //         author: await this.page.locator(ItemDetailPageLocators.Author).textContent(),
+    //         category: await this.page.locator(ItemDetailPageLocators.Category).textContent(),
+    //         price: await this.page.locator(ItemDetailPageLocators.Price).textContent(),
+    //       };
+      
+    //       console.log(`Book selected: ${book.title} - ${book.price}`);
+    //       selectedBooks.push(book);
+      
+    //       // Navigate back to the home page
+    //       await this.page.goto(Url.BASEURL);
+    //     }
+      
+    //     return selectedBooks;
+    //   }
+
+    //   public async verifyBookDetails(expectedBook: Book): Promise<void> {
+    //     const title = await this.page.locator(ItemDetailPageLocators.Title).textContent();
+    //     const author = await this.page.locator(ItemDetailPageLocators.Author).textContent();
+    //     const category = await this.page.locator(ItemDetailPageLocators.Category).textContent();
+    //     const price = await this.page.locator(ItemDetailPageLocators.Price).textContent();
+      
+    //     expect(title).toBe(expectedBook.title);
+    //     expect(author).toBe(expectedBook.author);
+    //     expect(category).toBe(expectedBook.category);
+    //     expect(price).toBe(expectedBook.price);
+      
+    //     console.log(`Verified details for book: ${expectedBook.title}`);
+     // }
+      
+      
     
 
   
