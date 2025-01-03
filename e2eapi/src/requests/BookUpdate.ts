@@ -65,7 +65,7 @@ export class BookUpdate {
     }
 
     public async updateBookAdminMissingTitle(updatedBook: Book) {
-        const incompleteBook = { ...updatedBook, title: "" }; // Clear title
+        const incompleteBook = { ...updatedBook, title: null }; // Clear title
         const response: ServerResponse = await this.requestHandler.putRequest(UserRole.ADMIN, EndPoint.UPDATEBOOK, incompleteBook, incompleteBook.id);
         expect(response.status).toBe(ResponseStatusCode.BAD_REQUEST);
         return response;
@@ -73,7 +73,7 @@ export class BookUpdate {
     }
 
     public async updateBookAdminMissingAuthor(updatedBook: Book) {
-        const incompleteBook = { ...updatedBook, author: "" }; // Clear author
+        const incompleteBook = { ...updatedBook, author: null }; // Clear author
         const response: ServerResponse = await this.requestHandler.putRequest(UserRole.ADMIN, EndPoint.UPDATEBOOK, incompleteBook, incompleteBook.id);
         expect(response.status).toBe(ResponseStatusCode.BAD_REQUEST);
         return response;
@@ -88,7 +88,7 @@ export class BookUpdate {
     }
 
     public async updateBookUserMissingTitle(updatedBook: Book) {
-        const incompleteBook = { ...updatedBook, title: "" }; // Clear title
+        const incompleteBook = { ...updatedBook, title: null }; // Clear title
         const response: ServerResponse = await this.requestHandler.putRequest(UserRole.USER, EndPoint.UPDATEBOOK, incompleteBook, incompleteBook.id);
         expect(response.status).toBe(ResponseStatusCode.FORBIDDEN);
         return response;
@@ -96,7 +96,7 @@ export class BookUpdate {
     }
 
     public async updateBookUserMissingAuthor(updatedBook: Book) {
-        const incompleteBook = { ...updatedBook, author: "" }; // Clear author
+        const incompleteBook = { ...updatedBook, author: null }; // Clear author
         const response: ServerResponse = await this.requestHandler.putRequest(UserRole.USER, EndPoint.UPDATEBOOK, incompleteBook, incompleteBook.id);
         expect(response.status).toBe(ResponseStatusCode.FORBIDDEN);
         return response;

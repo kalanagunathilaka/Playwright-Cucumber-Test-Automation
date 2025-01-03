@@ -16,7 +16,7 @@ export class BookCreation {
         this.requestHandler = new RequestHandler(this.request);
     }
 
-    public async validBookCreation() {
+    public async validBookCreation(userRole: UserRole = UserRole.ADMIN) : Promise<Book> {
         const uniqueTimestamp = new Date().getTime();
         const randomStr = `API_Test_${uniqueTimestamp}`;
     
@@ -25,15 +25,21 @@ export class BookCreation {
             title: `${randomStr}_TITLE`,
             author: `${randomStr}_AUTHOR`,
         };
-        const response: ServerResponse = await this.requestHandler.postRequest(UserRole.ADMIN, EndPoint.CREATEBOOK, book);
-    
+        const response: ServerResponse = await this.requestHandler.postRequest(userRole, EndPoint.CREATEBOOK, book);
+        
+        if (userRole === UserRole.UNAUTHORIZED) {
+            expect(response.status).toBe(ResponseStatusCode.UNAUTHORIZED);
+            expect(response.statusText).toBe('');
+            console.log('Unauthorized user cannot create a book');
+            return {} as Book;
+        }
+
         expect(response.status).toBe(ResponseStatusCode.CREATED);
         expect(response.statusText).toBe('');
         expect(response.json.title).toBe(`${randomStr}_TITLE`);
         expect(response.json.author).toBe(`${randomStr}_AUTHOR`);
     
-        console.log(`Book : ${randomStr}_TITLE Successfully Saved.`);
-        book.id = response.json.id;
-        return book;
+        console.log(`Id: ${response.json.id} Title: ${response.json.title} Book created successfully`);
+        return response.json;
     }
 }

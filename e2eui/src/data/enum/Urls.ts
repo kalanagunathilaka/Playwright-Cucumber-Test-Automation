@@ -5,6 +5,8 @@ export enum Url {
     REGISTRATION = "/register",
     CART = "/shopping-cart",
     CHECKOUT = "/checkout",
+    BOOKCATEGORY = "/filter?category=",
+    SEARCHEDITEM = "/search?item="    
     WISHLIST = "/wishlist",
     
     

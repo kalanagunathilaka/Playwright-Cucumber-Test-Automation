@@ -97,7 +97,7 @@ When('the admin sends the update request with missing ID', async function () {
 
 Then('the admin should see a 405 Method Not Allowed error', async function () {
     expect(this.response.status).toBe(ResponseStatusCode.METHOD_NOT_ALLOWED);
-    console.log('Received expected error: Method Not Allowed');
+    console.log('Received expected error: 405 Method Not Allowed');
 });
 
 When('the admin sends the update request with missing title', async function () {
@@ -108,7 +108,7 @@ When('the admin sends the update request with missing title', async function () 
 
 Then('the admin should see a 400 Bad Request error', async function () {
     expect(this.response.status).toBe(ResponseStatusCode.BAD_REQUEST);
-    console.log('Received expected error: Bad Request');
+    console.log('Received expected error: 400 Bad Request');
 });
 
 When('the admin sends the update request with missing author', async function () {
@@ -126,7 +126,7 @@ When('the user sends the update request with missing ID', async function () {
 
 Then('the user should see a 405 Method Not Allowed error', async function () {
     expect(this.response.status).toBe(ResponseStatusCode.METHOD_NOT_ALLOWED);
-    console.log('Received expected error: Method Not Allowed');
+    console.log('Received expected error: 405 Method Not Allowed');
 });
 
 When('the user sends the update request with missing title', async function () {
@@ -137,7 +137,7 @@ When('the user sends the update request with missing title', async function () {
 
 Then('the user should see a 403 Forbidden error', async function () {
     expect(this.response.status).toBe(ResponseStatusCode.FORBIDDEN);
-    console.log('Received expected error: Forbidden');
+    console.log('Received expected error: 403 Forbidden');
 });
 
 When('the user sends the update request with missing author', async function () {
@@ -148,7 +148,7 @@ When('the user sends the update request with missing author', async function () 
 
 Then('the user should see a 400 Forbidden error', async function () {
     expect(this.response.status).toBe(ResponseStatusCode.BAD_REQUEST);
-    console.log('Received expected error: Bad Request');
+    console.log('Received expected error: 400 Bad Request');
 });
 
 
