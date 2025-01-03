@@ -1,15 +1,26 @@
-Feature: Wishlist functionality after registration
+Feature: Wishlist functionality
 
-  Scenario: Before Registration, Wishlist icon shouldn't be visible
-    Given Wishlist icon should not be visible
+  Scenario: Before logged in, Wishlist icon shouldn't be visible
+    Given User is not logged in
+    Then Wishlist icon should not be visible
 
-  Scenario: After Registration, Add Book to Wishlist, Remove and Add to Cart
-    Given User is registered and logged in
+  Scenario: After logged in, Add Book to Wishlist, Remove and Add to Cart
+    Given User is logged in
     When User adds a book to the wishlist
     Then Book should be added to the wishlist
-    Given User removes the book from the wishlist
-    When User adds the book to the cart from the wishlist
-    Then New Book should be added to the cart
- 
-    
 
+  Scenario: After logged in, Remove Book from Wishlist
+    Given User is logged in
+    When User removes the book from the wishlist
+    Then Book should be removed from the wishlist
+
+  Scenario: After logged in, Clear Wishlist
+    Given User is logged in
+    When User clears the wishlist
+    Then Wishlist should be empty
+
+  Scenario: After logged in, Add to cart a Book from wishlist
+    Given User is logged in
+    Given User adds a book to the wishlist
+    When User adds the book to the cart from the wishlist
+    Then Book should be added to the cart

@@ -5,7 +5,7 @@
             "snippetInterface": "async-await"
         },
         "paths": [
-            "src/tests/features/**/wishlist.feature"
+            "src/tests/features/**/*.feature"
         ],
         "require": [
             "src/tests/steps/**/*.ts",
