@@ -5,6 +5,7 @@ import { Url } from '../data/enum/Urls';
 import { expect } from 'playwright/test';
 import { LoginLocators } from '../locators/loginLocator';
 import { HeaderLocators } from '../locators/headerLocator';
+import { PageHelper } from './helper/pageHelper';
 
 
 export class Login {
@@ -12,10 +13,12 @@ export class Login {
     private page: Page = undefined as unknown as Page;
     private playwrightConfig: PlaywrightConfig;
     private dataFactory: DataFactory;
+    private pageHelper: PageHelper;
 
     constructor() {
         this.playwrightConfig = PlaywrightConfig.getInstance();
         this.dataFactory = DataFactory.getInstance();
+        this.pageHelper = new PageHelper();
     }
 
     public async login(): Promise<void> {
@@ -34,7 +37,8 @@ export class Login {
         this.page = await this.playwrightConfig.getPage();
 
         if (!isRedirect) {
-            await this.page.goto(Url.LOGIN);
+            //await this.page.goto(Url.LOGIN);
+            await this.pageHelper.urlNavigate(Url.LOGIN);
         }
         await Promise.all([
             expect(this.page.locator(LoginLocators.TITLE).getByText("Login")).toBeVisible(),
@@ -48,17 +52,20 @@ export class Login {
     }
 
     public async loginWithValidCredentials(isRegistration: boolean = false): Promise<void> {
+        this.page = await this.playwrightConfig.getPage();
         const data = this.dataFactory.getData();
         const { userName, password } = isRegistration ? data.registrationData.userDetails : data.loginData.userDetails;      
 
-        await this.page.fill(LoginLocators.USERNAME, userName);
-        await this.page.fill(LoginLocators.PASSWORD, password);
+        await this.page.locator(LoginLocators.USERNAME).type(userName, { delay: 10 });
+        await this.page.locator(LoginLocators.PASSWORD).type(password, { delay: 10 });
         await this.page.click(LoginLocators.LOGIN_BUTTON);
+        await this.page.waitForTimeout(2000);
 
         console.log(`Logging with userName: ${userName} and password: ${password}`);
     }
 
     public async verifyLoggedInSuccessfully(isRegistration: boolean = false): Promise<void> {
+        this.page = await this.playwrightConfig.getPage();
         const data = this.dataFactory.getData();
         const { userName } = isRegistration ? data.registrationData.userDetails : data.loginData.userDetails;
 
@@ -87,10 +94,11 @@ export class Login {
         console.log('User Not logged in');
     }
 
-    public async logout(): Promise<void> {
+    public async logout(force: boolean = false): Promise<void> {
+        this.page = await this.playwrightConfig.getPage();
         const data = this.dataFactory.getData();
 
-        if (!data.loginData.isLoggedIn) {
+        if (!data.loginData.isLoggedIn && !force) {
             console.log('User is not logged in skipping logout');
             return;
         }
@@ -109,6 +117,7 @@ export class Login {
     }
 
     public async loginWithInValidCredentials(): Promise<void> {
+        this.page = await this.playwrightConfig.getPage();
         const data = this.dataFactory.getData();
 
         await Promise.all([
@@ -125,6 +134,7 @@ export class Login {
     }
 
     public async verifyErrorMessage(): Promise<void> {
+        this.page = await this.playwrightConfig.getPage();
         await Promise.all([
             expect(this.page.locator(LoginLocators.TITLE).getByText("Login")).toBeVisible(),
             expect(this.page.locator(LoginLocators.ERROR_MESSAGE).getByText("Username or Password is incorrect.")).toBeVisible(),
@@ -132,4 +142,22 @@ export class Login {
 
         console.log('Error message displayed successfully');
     }
+
+        // Verify that the user is not logged in
+        public async verifyUserIsNotLoggedIn() {
+            this.page = await this.playwrightConfig.getPage();
+            const isLoggedIn = await this.pageHelper.verifyUserIsLoggedIn();
+            if (isLoggedIn) {
+                await this.logout(true);
+            }
+        }
+    
+        // Verify that the user is logged in
+        public async verifyUserIsLoggedIn() {
+            this.page = await this.playwrightConfig.getPage();
+            const isLoggedIn = await this.pageHelper.verifyUserIsLoggedIn();
+            if (!isLoggedIn) {
+                await this.login();
+            }
+        }
 }
