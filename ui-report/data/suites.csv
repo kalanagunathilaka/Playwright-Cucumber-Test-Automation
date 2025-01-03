@@ -1,48 +1,48 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
 "As a Authenticated and Unauthenticated user
  I want to test cart functionality
- So that I can validate the behavior for different roles and scenarios","3501","Authenticated user checks out the cart","","Fri Jan 03 08:28:03 UTC 2025","passed","Fri Jan 03 08:28:07 UTC 2025","","","",""
+ So that I can validate the behavior for different roles and scenarios","2867","UnAuthenticated user successfully adds a book to cart via Iten Detail page","","Fri Jan 03 08:36:15 UTC 2025","passed","Fri Jan 03 08:36:18 UTC 2025","","","",""
+"As a Authenticated and Unauthenticated user
+ I want to test cart functionality
+ So that I can validate the behavior for different roles and scenarios","3485","Authenticated user checks out the cart","","Fri Jan 03 08:36:04 UTC 2025","passed","Fri Jan 03 08:36:08 UTC 2025","","","",""
+"As a Authenticated and Unauthenticated user
+ I want to test cart functionality
+ So that I can validate the behavior for different roles and scenarios","3282","UnAuthenticated user successfully adds a book to cart via Home page","","Fri Jan 03 08:35:46 UTC 2025","passed","Fri Jan 03 08:35:49 UTC 2025","","","",""
+"As a Authenticated and Unauthenticated user
+ I want to test cart functionality
+ So that I can validate the behavior for different roles and scenarios","4400","Authenticated user successfully increase the quantity of a book in cart","","Fri Jan 03 08:35:56 UTC 2025","passed","Fri Jan 03 08:36:01 UTC 2025","","","",""
+"As a Authenticated and Unauthenticated user
+ I want to test cart functionality
+ So that I can validate the behavior for different roles and scenarios","6202","Authenticated user successfully adds a book to cart via Home page","","Fri Jan 03 08:35:40 UTC 2025","passed","Fri Jan 03 08:35:46 UTC 2025","","","",""
 "As a unauthenticated user
 I want to test homepage functionality
-So that I can filter price, search books and choose product category","296","Price filter","","Fri Jan 03 08:28:18 UTC 2025","passed","Fri Jan 03 08:28:18 UTC 2025","","","",""
-"As a Authenticated and Unauthenticated user
- I want to test cart functionality
- So that I can validate the behavior for different roles and scenarios","2815","Authenticated user successfully adds a book to cart via Item detail Page","","Fri Jan 03 08:28:11 UTC 2025","passed","Fri Jan 03 08:28:14 UTC 2025","","","",""
-"As a Authenticated and Unauthenticated user
- I want to test cart functionality
- So that I can validate the behavior for different roles and scenarios","4385","Authenticated user successfully increase the quantity of a book in cart","","Fri Jan 03 08:27:55 UTC 2025","passed","Fri Jan 03 08:27:59 UTC 2025","","","",""
-"","1513","User login with invalid credentials","","Fri Jan 03 08:28:22 UTC 2025","passed","Fri Jan 03 08:28:23 UTC 2025","","","",""
-"As a Authenticated and Unauthenticated user
- I want to test cart functionality
- So that I can validate the behavior for different roles and scenarios","7163","Authenticated user successfully removes a book from cart","","Fri Jan 03 08:27:48 UTC 2025","passed","Fri Jan 03 08:27:55 UTC 2025","","","",""
-"As a Authenticated and Unauthenticated user
- I want to test cart functionality
- So that I can validate the behavior for different roles and scenarios","4399","Authenticated user successfully decrease the quantity of a book in cart","","Fri Jan 03 08:28:07 UTC 2025","passed","Fri Jan 03 08:28:11 UTC 2025","","","",""
-"","2113","Before logged in, Wishlist icon shouldn't be visible","","Fri Jan 03 08:28:36 UTC 2025","passed","Fri Jan 03 08:28:38 UTC 2025","","","",""
-"","62115","After logged in, Add Book to Wishlist, Remove and Add to Cart","","Fri Jan 03 08:28:38 UTC 2025","broken","Fri Jan 03 08:29:40 UTC 2025","","","",""
-"","3553","User login with valid credentials","","Fri Jan 03 08:28:18 UTC 2025","passed","Fri Jan 03 08:28:22 UTC 2025","","","",""
-"As a Authenticated and Unauthenticated user
- I want to test cart functionality
- So that I can validate the behavior for different roles and scenarios","3599","Authenticated user clears the cart","","Fri Jan 03 08:27:59 UTC 2025","passed","Fri Jan 03 08:28:03 UTC 2025","","","",""
-"","7098","After logged in, Remove Book from Wishlist","","Fri Jan 03 08:29:40 UTC 2025","failed","Fri Jan 03 08:29:47 UTC 2025","","","",""
-"As a Authenticated and Unauthenticated user
- I want to test cart functionality
- So that I can validate the behavior for different roles and scenarios","3298","UnAuthenticated user successfully adds a book to cart via Home page","","Fri Jan 03 08:27:45 UTC 2025","passed","Fri Jan 03 08:27:48 UTC 2025","","","",""
+So that I can filter price, search books and choose product category","816","Select Category","","Fri Jan 03 08:36:18 UTC 2025","passed","Fri Jan 03 08:36:18 UTC 2025","","","",""
 "As a Authenticated and Unauthenticated user
  I want to test Book details view functionality
- So that I can validate the behavior for different roles and scenarios.","2702","Select two random books and check if their details are displayed","","Fri Jan 03 08:28:33 UTC 2025","passed","Fri Jan 03 08:28:36 UTC 2025","","","",""
+ So that I can validate the behavior for different roles and scenarios.","1316","Select two random books and check if their details are displayed","","Fri Jan 03 08:36:29 UTC 2025","passed","Fri Jan 03 08:36:30 UTC 2025","","","",""
+"","1115","After logged in, Add Book to Wishlist, Remove and Add to Cart","","Fri Jan 03 08:36:32 UTC 2025","broken","Fri Jan 03 08:36:33 UTC 2025","","","",""
+"","1115","Before logged in, Wishlist icon shouldn't be visible","","Fri Jan 03 08:36:30 UTC 2025","broken","Fri Jan 03 08:36:32 UTC 2025","","","",""
+"","1515","User login with invalid credentials","","Fri Jan 03 08:36:23 UTC 2025","passed","Fri Jan 03 08:36:24 UTC 2025","","","",""
+"","1115","After logged in, Add to cart a Book from wishlist","","Fri Jan 03 08:36:35 UTC 2025","broken","Fri Jan 03 08:36:36 UTC 2025","","","",""
+"","1118","After logged in, Clear Wishlist","","Fri Jan 03 08:36:34 UTC 2025","broken","Fri Jan 03 08:36:35 UTC 2025","","","",""
+"","3530","User login with valid credentials","","Fri Jan 03 08:36:19 UTC 2025","passed","Fri Jan 03 08:36:23 UTC 2025","","","",""
+"","4784","User registration with valid data","","Fri Jan 03 08:36:24 UTC 2025","passed","Fri Jan 03 08:36:29 UTC 2025","","","",""
+"","1117","After logged in, Remove Book from Wishlist","","Fri Jan 03 08:36:33 UTC 2025","broken","Fri Jan 03 08:36:34 UTC 2025","","","",""
 "As a Authenticated and Unauthenticated user
  I want to test cart functionality
- So that I can validate the behavior for different roles and scenarios","6292","Authenticated user successfully adds a book to cart via Home page","","Fri Jan 03 08:27:38 UTC 2025","passed","Fri Jan 03 08:27:45 UTC 2025","","","",""
-"","62131","After logged in, Add to cart a Book from wishlist","","Fri Jan 03 08:30:50 UTC 2025","broken","Fri Jan 03 08:31:53 UTC 2025","","","",""
-"As a unauthenticated user
-I want to test homepage functionality
-So that I can filter price, search books and choose product category","916","Select Category","","Fri Jan 03 08:28:17 UTC 2025","passed","Fri Jan 03 08:28:18 UTC 2025","","","",""
-"As a unauthenticated user
-I want to test homepage functionality
-So that I can filter price, search books and choose product category","502","Search a book from the search bar","","Fri Jan 03 08:28:18 UTC 2025","passed","Fri Jan 03 08:28:18 UTC 2025","","","",""
-"","63132","After logged in, Clear Wishlist","","Fri Jan 03 08:29:47 UTC 2025","broken","Fri Jan 03 08:30:50 UTC 2025","","","",""
-"","9831","User registration with valid data","","Fri Jan 03 08:28:23 UTC 2025","failed","Fri Jan 03 08:28:33 UTC 2025","","","",""
+ So that I can validate the behavior for different roles and scenarios","7080","Authenticated user successfully removes a book from cart","","Fri Jan 03 08:35:49 UTC 2025","passed","Fri Jan 03 08:35:56 UTC 2025","","","",""
 "As a Authenticated and Unauthenticated user
  I want to test cart functionality
- So that I can validate the behavior for different roles and scenarios","2883","UnAuthenticated user successfully adds a book to cart via Iten Detail page","","Fri Jan 03 08:28:14 UTC 2025","passed","Fri Jan 03 08:28:17 UTC 2025","","","",""
+ So that I can validate the behavior for different roles and scenarios","2799","Authenticated user successfully adds a book to cart via Item detail Page","","Fri Jan 03 08:36:12 UTC 2025","passed","Fri Jan 03 08:36:15 UTC 2025","","","",""
+"As a Authenticated and Unauthenticated user
+ I want to test cart functionality
+ So that I can validate the behavior for different roles and scenarios","4382","Authenticated user successfully decrease the quantity of a book in cart","","Fri Jan 03 08:36:08 UTC 2025","passed","Fri Jan 03 08:36:12 UTC 2025","","","",""
+"As a unauthenticated user
+I want to test homepage functionality
+So that I can filter price, search books and choose product category","537","Search a book from the search bar","","Fri Jan 03 08:36:18 UTC 2025","passed","Fri Jan 03 08:36:19 UTC 2025","","","",""
+"As a Authenticated and Unauthenticated user
+ I want to test cart functionality
+ So that I can validate the behavior for different roles and scenarios","3597","Authenticated user clears the cart","","Fri Jan 03 08:36:01 UTC 2025","passed","Fri Jan 03 08:36:04 UTC 2025","","","",""
+"As a unauthenticated user
+I want to test homepage functionality
+So that I can filter price, search books and choose product category","301","Price filter","","Fri Jan 03 08:36:19 UTC 2025","passed","Fri Jan 03 08:36:19 UTC 2025","","","",""
