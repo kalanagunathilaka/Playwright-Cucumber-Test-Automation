@@ -48,7 +48,7 @@ export class BookDetails {
         await this.page.locator(HomePageLocators.BookCardTitle).nth(index).waitFor({ state: 'visible' });
         console.log(`Selected book index: ${index}`);
         const Title = await this.page.locator(HomePageLocators.BookCardTitle).nth(index).textContent();
-        const Price = await  this.page.locator(HomePageLocators.BookCardPrice).nth(index).textContent()
+        const Price = await  this.page.locator(HomePageLocators.BookCardPrice).nth(index).textContent();
         console.log(`Selected book: ${Title}`);
         const book: Book & { index: number } = {
           index,
