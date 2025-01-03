@@ -69,3 +69,33 @@ When("the user checks out the cart", async function () {
 Then("the cart should be redirected to the checkout page", async function () {
   await cartPage.verifyCartRedirectedToCheckout();
 });
+
+
+When("the user decrease the quantity of the book in cart", async function () {
+  this.cartItem = await cartPage.decreaseQuantityOfBookInCart(this.book);
+});
+
+Then(
+  "the quantity of the book should be decrease successfully",
+  async function () {
+    await cartPage.verifyBookQuantityUpdated(this.cartItem, "-");
+  }
+);
+
+When("the user adds the book to cart via Item detail Page", async function () {
+  console.log("\nAdding the book to cart via Item detail page");
+  this.book = await cartPage.addBookToCartViaItemDetailPage();
+});
+
+// When("the user selects two random books from the Home page", async function () {
+//   console.log("\nUser is selecting two random books from the Home page");
+//   this.selectedBooks = await cartPage.selectTwoRandomBooksFromHomePage();
+// });
+
+// Then("the details of both books should be displayed correctly", async function () {
+//   console.log("\nVerifying details of both selected books");
+//   for (const book of this.selectedBooks) {
+//     await cartPage.verifyBookDetails(book);
+//   }
+// });
+
