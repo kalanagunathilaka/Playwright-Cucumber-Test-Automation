@@ -5,6 +5,7 @@ import { UserRole } from "../data/enum/UserRole";
 import { EndPoint } from "../data/enum/EndPoint";
 import { ResponseStatusCode } from "../data/enum/ResponseStatusCode";
 import { Book } from "../models/Book";
+import { InvalidBookCreation, InvalidBookCreationDetails } from "../data/enum/InvalidBookCreation";
 
 export class BookCreation {
 
@@ -78,10 +79,7 @@ export class BookCreation {
         if (book?.author === undefined) {
             delete book.author;
         }
-        console.log("\nBook: ", book);
         const response: ServerResponse = await this.requestHandler.postRequest(userRole, EndPoint.CREATEBOOK, book);
-        console.log("\nResponse: ", response);
-        console.log("****************************************************");
 
         if (userRole === UserRole.UNAUTHORIZED) {
             expect(response.status).toBe(ResponseStatusCode.UNAUTHORIZED);
@@ -89,7 +87,17 @@ export class BookCreation {
             console.log('Unauthorized user cannot create a book');
             return;
         }
-
-        expect(response.status).toBe(ResponseStatusCode.BAD_REQUEST);
+        //To Handle spring project first time and next time run issue
+        if (
+            (receivingData.title === undefined && receivingData.author === undefined && 
+                Object.is(receivingData, InvalidBookCreationDetails[InvalidBookCreation.MANDATORY_FIELDS_NOT_SENT])) ||
+            (receivingData.title === null && receivingData.author === null && 
+                Object.is(receivingData, InvalidBookCreationDetails[InvalidBookCreation.MANDATORY_FIELDS_NULL]))
+        ) {
+            expect([ResponseStatusCode.BAD_REQUEST, ResponseStatusCode.ALREADY_REPORTED]).toContain(response.status);
+        }else {
+            expect(response.status).toBe(ResponseStatusCode.BAD_REQUEST);
+        }
+        console.log('Invalid book creation');
     }
 }

@@ -7,7 +7,7 @@ Feature: Book deletion functionality
   Scenario: Admin successfully deletes a valid book
     Given an admin has created a book
     When the admin deletes the same book
-    #Then the book should be deleted successfully
+    Then the book should be deleted successfully
 
   Scenario: Admin attempts to delete a book with missing ID
     When the admin sends the delete request with missing ID

@@ -23,13 +23,13 @@ export class BookUpdate {
 
     public async UserUnauthorizedRequest(updatedBook: Book) {
         const response: ServerResponse = await this.requestHandler.putRequest(UserRole.USER, EndPoint.UPDATEBOOK, updatedBook,updatedBook.id);
-        expect(response.status).toBe(ResponseStatusCode.UNAUTHORIZED);
+        expect(response.status).toBe(ResponseStatusCode.FORBIDDEN);
         console.log(`User unauthorized to update book: ${updatedBook.id}`);
     }
 
     public async UnauthenticatedUserUnauthorizedRequest(updatedBook: Book) {
         const response: ServerResponse = await this.requestHandler.putRequest(UserRole.UNAUTHORIZED, EndPoint.UPDATEBOOK, updatedBook,updatedBook.id);
-        expect(response.status).toBe(ResponseStatusCode.FORBIDDEN);
+        expect(response.status).toBe(ResponseStatusCode.UNAUTHORIZED);
         console.log(`User unauthorized to update book: ${updatedBook.id}`);
     }
 
@@ -58,14 +58,15 @@ export class BookUpdate {
     //Anudhi's
   
     public async updateBookAdminMissingId(updatedBook: Book) {
-            const response: ServerResponse = await this.requestHandler.putRequest(UserRole.ADMIN, EndPoint.UPDATEBOOK, updatedBook, "");
+            const response: ServerResponse = await this.requestHandler.putRequest(UserRole.ADMIN, EndPoint.UPDATEBOOK, updatedBook);
             expect(response.status).toBe(ResponseStatusCode.METHOD_NOT_ALLOWED);
             console.log(`Admin received 405 Method Not Allowed error for missing book ID`);
             return response;
     }
 
     public async updateBookAdminMissingTitle(updatedBook: Book) {
-        const incompleteBook = { ...updatedBook, title: null }; // Clear title
+        const incompleteBook = { ...updatedBook, title: undefined, author: `UpdatedAuthor_${new Date().getTime()}` }; 
+        delete incompleteBook.title// Clear title
         const response: ServerResponse = await this.requestHandler.putRequest(UserRole.ADMIN, EndPoint.UPDATEBOOK, incompleteBook, incompleteBook.id);
         expect(response.status).toBe(ResponseStatusCode.BAD_REQUEST);
         return response;
@@ -73,7 +74,8 @@ export class BookUpdate {
     }
 
     public async updateBookAdminMissingAuthor(updatedBook: Book) {
-        const incompleteBook = { ...updatedBook, author: null }; // Clear author
+        const incompleteBook = { ...updatedBook, author: undefined, title: `UpdatedTitle_${new Date().getTime()}` }; 
+        delete incompleteBook.author// Clear author
         const response: ServerResponse = await this.requestHandler.putRequest(UserRole.ADMIN, EndPoint.UPDATEBOOK, incompleteBook, incompleteBook.id);
         expect(response.status).toBe(ResponseStatusCode.BAD_REQUEST);
         return response;
@@ -81,14 +83,15 @@ export class BookUpdate {
     }
 
     public async updateBookUserMissingId(updatedBook: Book) {
-        const response: ServerResponse = await this.requestHandler.putRequest(UserRole.USER, EndPoint.UPDATEBOOK, updatedBook, "");
+        const response: ServerResponse = await this.requestHandler.putRequest(UserRole.USER, EndPoint.UPDATEBOOK, updatedBook);
         expect(response.status).toBe(ResponseStatusCode.METHOD_NOT_ALLOWED);
         return response;
         console.log(`User received 405 Method Not Allowed error for missing book ID`);
     }
 
     public async updateBookUserMissingTitle(updatedBook: Book) {
-        const incompleteBook = { ...updatedBook, title: null }; // Clear title
+        const incompleteBook = { ...updatedBook, title: undefined, author : `UpdatedAuthor_${new Date().getTime()}` }; 
+        delete incompleteBook.title// Clear title
         const response: ServerResponse = await this.requestHandler.putRequest(UserRole.USER, EndPoint.UPDATEBOOK, incompleteBook, incompleteBook.id);
         expect(response.status).toBe(ResponseStatusCode.FORBIDDEN);
         return response;
@@ -96,7 +99,8 @@ export class BookUpdate {
     }
 
     public async updateBookUserMissingAuthor(updatedBook: Book) {
-        const incompleteBook = { ...updatedBook, author: null }; // Clear author
+        const incompleteBook = { ...updatedBook, author: undefined, title: `UpdatedTitle_${new Date().getTime()}` }; 
+        delete incompleteBook.author// Clear author
         const response: ServerResponse = await this.requestHandler.putRequest(UserRole.USER, EndPoint.UPDATEBOOK, incompleteBook, incompleteBook.id);
         expect(response.status).toBe(ResponseStatusCode.FORBIDDEN);
         return response;

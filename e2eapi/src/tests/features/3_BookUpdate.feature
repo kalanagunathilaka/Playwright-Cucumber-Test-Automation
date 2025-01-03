@@ -12,7 +12,6 @@ Scenario: Admin successfully updates a book
 Scenario: User fails to update a book
     Given an Admin has created a book
     When the user updates the book details
-
     Then the book should not be updated
 
 Scenario: unauthenticated user fails to update a book

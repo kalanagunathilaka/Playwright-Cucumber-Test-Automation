@@ -28,10 +28,9 @@ export class RequestHandler {
         return this.getResponse(response);
     }
 
-    public async putRequest(userRole: UserRole, endPoint: string, body: Book, param: any) {
+    public async putRequest(userRole: UserRole, endPoint: string, body: Book, param: any = "") {
         const headers = this.setHeader(userRole);
         const response = await this.request.put(`${BaseUrl.LOCAL}/${endPoint}/${param}`, { headers: headers, data: body });
-        console.log("url", `${BaseUrl.LOCAL}/${endPoint}`);
         return this.getResponse(response);
     }
 

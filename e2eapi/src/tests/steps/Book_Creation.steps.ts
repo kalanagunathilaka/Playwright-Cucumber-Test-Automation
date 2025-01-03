@@ -1,4 +1,4 @@
-import { BookRetrievalAll } from './../../requests/BookRetrievalAll';
+import { BookRetrievalAll } from '../../requests/BookRetrievalAll';
 import { Given, setDefaultTimeout, Then, When } from '@cucumber/cucumber';
 import { BookCreation } from '../../requests/BookCreation';
 import { UserRole } from '../../data/enum/UserRole';
