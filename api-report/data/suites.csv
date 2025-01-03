@@ -1,76 +1,76 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","493","Admin Creates a valid book","","Fri Jan 03 03:49:26 UTC 2025","passed","Fri Jan 03 03:49:27 UTC 2025","","","",""
 "As an admin or user
   I want to test book deletion functionality
-  So that I can validate the API behavior for different roles and scenarios","83","User attempts to delete a book with missing ID","","Fri Jan 03 03:49:28 UTC 2025","failed","Fri Jan 03 03:49:28 UTC 2025","","","",""
+  So that I can validate the API behavior for different roles and scenarios","99","Admin successfully deletes a valid book","","Fri Jan 03 06:09:37 UTC 2025","failed","Fri Jan 03 06:09:37 UTC 2025","","","",""
 "As a user or admin
   I want to test book retrieval functionality
-  So that I can validate the API's response for different scenarios","83","User attempts to retrieve a book with an invalid ID","","Fri Jan 03 03:49:28 UTC 2025","failed","Fri Jan 03 03:49:29 UTC 2025","","","",""
+  So that I can validate the API's response for different scenarios","167","User retrieves a book by a valid ID","","Fri Jan 03 06:09:38 UTC 2025","failed","Fri Jan 03 06:09:38 UTC 2025","","","",""
 "As an admin  or user
   I want to update a book
-  So that I can manage the books in the library","81","User attempts to update a book with missing author","","Fri Jan 03 03:49:30 UTC 2025","passed","Fri Jan 03 03:49:30 UTC 2025","","","",""
-"","161","Unauthorized User try to Retrieve all books","","Fri Jan 03 03:49:29 UTC 2025","passed","Fri Jan 03 03:49:29 UTC 2025","","","",""
+  So that I can manage the books in the library","82","User attempts to update a book with missing author","","Fri Jan 03 06:09:39 UTC 2025","passed","Fri Jan 03 06:09:40 UTC 2025","","","",""
 "As an admin  or user
   I want to update a book
-  So that I can manage the books in the library","166","User fails to update a book","","Fri Jan 03 03:49:29 UTC 2025","failed","Fri Jan 03 03:49:29 UTC 2025","","","",""
+  So that I can manage the books in the library","79","Admin attempts to update a book with missing ID","","Fri Jan 03 06:09:39 UTC 2025","passed","Fri Jan 03 06:09:39 UTC 2025","","","",""
+"As an admin or user
+  I want to test book deletion functionality
+  So that I can validate the API behavior for different roles and scenarios","87","Admin attempts to delete a book with an invalid ID","","Fri Jan 03 06:09:37 UTC 2025","failed","Fri Jan 03 06:09:37 UTC 2025","","","",""
 "As an admin  or user
   I want to update a book
-  So that I can manage the books in the library","80","Admin attempts to update a book with missing ID","","Fri Jan 03 03:49:30 UTC 2025","passed","Fri Jan 03 03:49:30 UTC 2025","","","",""
+  So that I can manage the books in the library","81","Admin attempts to update a book with an invalid ID","","Fri Jan 03 06:09:39 UTC 2025","passed","Fri Jan 03 06:09:39 UTC 2025","","","",""
 "As an admin  or user
   I want to update a book
-  So that I can manage the books in the library","81","User attempts to update a book with an invalid ID","","Fri Jan 03 03:49:30 UTC 2025","passed","Fri Jan 03 03:49:30 UTC 2025","","","",""
+  So that I can manage the books in the library","102","Admin successfully updates a book","","Fri Jan 03 06:09:38 UTC 2025","passed","Fri Jan 03 06:09:39 UTC 2025","","","",""
+"As an admin or user
+  I want to test book deletion functionality
+  So that I can validate the API behavior for different roles and scenarios","83","Admin attempts to delete a book with missing ID","","Fri Jan 03 06:09:37 UTC 2025","failed","Fri Jan 03 06:09:37 UTC 2025","","","",""
 "As a user or admin
   I want to test book retrieval functionality
-  So that I can validate the API's response for different scenarios","169","User retrieves a book by a valid ID","","Fri Jan 03 03:49:28 UTC 2025","failed","Fri Jan 03 03:49:28 UTC 2025","","","",""
+  So that I can validate the API's response for different scenarios","86","Admin attempts to retrieve a book with an invalid ID","","Fri Jan 03 06:09:38 UTC 2025","passed","Fri Jan 03 06:09:38 UTC 2025","","","",""
 "As an admin  or user
   I want to update a book
-  So that I can manage the books in the library","86","Admin attempts to update a book with missing title","","Fri Jan 03 03:49:30 UTC 2025","failed","Fri Jan 03 03:49:30 UTC 2025","","","",""
-"","92","Admin Retrieve all books","","Fri Jan 03 03:49:29 UTC 2025","passed","Fri Jan 03 03:49:29 UTC 2025","","","",""
+  So that I can manage the books in the library","160","unauthenticated user fails to update a book","","Fri Jan 03 06:09:39 UTC 2025","failed","Fri Jan 03 06:09:39 UTC 2025","","","",""
+"","158","Unauthorized User try to Retrieve all books","","Fri Jan 03 06:09:38 UTC 2025","passed","Fri Jan 03 06:09:38 UTC 2025","","","",""
+"","182","User Creates a valid book","","Fri Jan 03 06:09:36 UTC 2025","passed","Fri Jan 03 06:09:37 UTC 2025","","","",""
 "As a user or admin
   I want to test book retrieval functionality
-  So that I can validate the API's response for different scenarios","163","Unauthenticated user attempts to retrieve a book","","Fri Jan 03 03:49:29 UTC 2025","passed","Fri Jan 03 03:49:29 UTC 2025","","","",""
-"As an admin or user
-  I want to test book deletion functionality
-  So that I can validate the API behavior for different roles and scenarios","116","Admin successfully deletes a valid book","","Fri Jan 03 03:49:27 UTC 2025","failed","Fri Jan 03 03:49:27 UTC 2025","","","",""
-"","190","User Creates a valid book","","Fri Jan 03 03:49:27 UTC 2025","passed","Fri Jan 03 03:49:27 UTC 2025","","","",""
-"As an admin or user
-  I want to test book deletion functionality
-  So that I can validate the API behavior for different roles and scenarios","84","Admin attempts to delete a book with an invalid ID","","Fri Jan 03 03:49:27 UTC 2025","failed","Fri Jan 03 03:49:28 UTC 2025","","","",""
-"As an admin or user
-  I want to test book deletion functionality
-  So that I can validate the API behavior for different roles and scenarios","180","User attempts to delete a book with valid details","","Fri Jan 03 03:49:28 UTC 2025","failed","Fri Jan 03 03:49:28 UTC 2025","","","",""
+  So that I can validate the API's response for different scenarios","95","Admin retrieves a book by a valid ID","","Fri Jan 03 06:09:37 UTC 2025","passed","Fri Jan 03 06:09:38 UTC 2025","","","",""
 "As an admin  or user
   I want to update a book
-  So that I can manage the books in the library","84","User attempts to update a book with missing title","","Fri Jan 03 03:49:30 UTC 2025","passed","Fri Jan 03 03:49:30 UTC 2025","","","",""
-"As an admin or user
-  I want to test book deletion functionality
-  So that I can validate the API behavior for different roles and scenarios","88","User attempts to delete a book with an invalid ID","","Fri Jan 03 03:49:28 UTC 2025","failed","Fri Jan 03 03:49:28 UTC 2025","","","",""
-"As an admin or user
-  I want to test book deletion functionality
-  So that I can validate the API behavior for different roles and scenarios","84","Admin attempts to delete a book with missing ID","","Fri Jan 03 03:49:27 UTC 2025","failed","Fri Jan 03 03:49:27 UTC 2025","","","",""
+  So that I can manage the books in the library","83","Admin attempts to update a book with missing author","","Fri Jan 03 06:09:39 UTC 2025","failed","Fri Jan 03 06:09:39 UTC 2025","","","",""
 "As an admin  or user
   I want to update a book
-  So that I can manage the books in the library","81","User attempts to update a book with missing ID","","Fri Jan 03 03:49:30 UTC 2025","passed","Fri Jan 03 03:49:30 UTC 2025","","","",""
+  So that I can manage the books in the library","163","User fails to update a book","","Fri Jan 03 06:09:39 UTC 2025","failed","Fri Jan 03 06:09:39 UTC 2025","","","",""
+"","166","User Retrieve all books","","Fri Jan 03 06:09:38 UTC 2025","passed","Fri Jan 03 06:09:38 UTC 2025","","","",""
+"","90","Admin Retrieve all books","","Fri Jan 03 06:09:38 UTC 2025","passed","Fri Jan 03 06:09:38 UTC 2025","","","",""
+"As an admin  or user
+  I want to update a book
+  So that I can manage the books in the library","79","User attempts to update a book with missing title","","Fri Jan 03 06:09:39 UTC 2025","passed","Fri Jan 03 06:09:39 UTC 2025","","","",""
 "As a user or admin
   I want to test book retrieval functionality
-  So that I can validate the API's response for different scenarios","97","Admin retrieves a book by a valid ID","","Fri Jan 03 03:49:28 UTC 2025","passed","Fri Jan 03 03:49:28 UTC 2025","","","",""
-"As an admin  or user
-  I want to update a book
-  So that I can manage the books in the library","83","Admin attempts to update a book with an invalid ID","","Fri Jan 03 03:49:30 UTC 2025","passed","Fri Jan 03 03:49:30 UTC 2025","","","",""
-"As an admin or user
-  I want to test book deletion functionality
-  So that I can validate the API behavior for different roles and scenarios","171","Unauthenticated user attempts to delete a book","","Fri Jan 03 03:49:28 UTC 2025","passed","Fri Jan 03 03:49:28 UTC 2025","","","",""
-"","169","User Retrieve all books","","Fri Jan 03 03:49:29 UTC 2025","passed","Fri Jan 03 03:49:29 UTC 2025","","","",""
-"As an admin  or user
-  I want to update a book
-  So that I can manage the books in the library","83","Admin attempts to update a book with missing author","","Fri Jan 03 03:49:30 UTC 2025","failed","Fri Jan 03 03:49:30 UTC 2025","","","",""
-"As an admin  or user
-  I want to update a book
-  So that I can manage the books in the library","104","Admin successfully updates a book","","Fri Jan 03 03:49:29 UTC 2025","passed","Fri Jan 03 03:49:29 UTC 2025","","","",""
-"","90","Unauthorized User Creates a valid book","","Fri Jan 03 03:49:27 UTC 2025","passed","Fri Jan 03 03:49:27 UTC 2025","","","",""
-"As an admin  or user
-  I want to update a book
-  So that I can manage the books in the library","162","unauthenticated user fails to update a book","","Fri Jan 03 03:49:29 UTC 2025","failed","Fri Jan 03 03:49:30 UTC 2025","","","",""
+  So that I can validate the API's response for different scenarios","163","Unauthenticated user attempts to retrieve a book","","Fri Jan 03 06:09:38 UTC 2025","passed","Fri Jan 03 06:09:38 UTC 2025","","","",""
 "As a user or admin
   I want to test book retrieval functionality
-  So that I can validate the API's response for different scenarios","82","Admin attempts to retrieve a book with an invalid ID","","Fri Jan 03 03:49:28 UTC 2025","passed","Fri Jan 03 03:49:28 UTC 2025","","","",""
+  So that I can validate the API's response for different scenarios","84","User attempts to retrieve a book with an invalid ID","","Fri Jan 03 06:09:38 UTC 2025","failed","Fri Jan 03 06:09:38 UTC 2025","","","",""
+"As an admin or user
+  I want to test book deletion functionality
+  So that I can validate the API behavior for different roles and scenarios","164","Unauthenticated user attempts to delete a book","","Fri Jan 03 06:09:37 UTC 2025","passed","Fri Jan 03 06:09:37 UTC 2025","","","",""
+"As an admin  or user
+  I want to update a book
+  So that I can manage the books in the library","89","Admin attempts to update a book with missing title","","Fri Jan 03 06:09:39 UTC 2025","passed","Fri Jan 03 06:09:39 UTC 2025","","","",""
+"As an admin or user
+  I want to test book deletion functionality
+  So that I can validate the API behavior for different roles and scenarios","83","User attempts to delete a book with an invalid ID","","Fri Jan 03 06:09:37 UTC 2025","failed","Fri Jan 03 06:09:37 UTC 2025","","","",""
+"","426","Admin Creates a valid book","","Fri Jan 03 06:09:36 UTC 2025","passed","Fri Jan 03 06:09:36 UTC 2025","","","",""
+"As an admin or user
+  I want to test book deletion functionality
+  So that I can validate the API behavior for different roles and scenarios","181","User attempts to delete a book with valid details","","Fri Jan 03 06:09:37 UTC 2025","failed","Fri Jan 03 06:09:37 UTC 2025","","","",""
+"As an admin or user
+  I want to test book deletion functionality
+  So that I can validate the API behavior for different roles and scenarios","86","User attempts to delete a book with missing ID","","Fri Jan 03 06:09:37 UTC 2025","failed","Fri Jan 03 06:09:37 UTC 2025","","","",""
+"As an admin  or user
+  I want to update a book
+  So that I can manage the books in the library","80","User attempts to update a book with missing ID","","Fri Jan 03 06:09:39 UTC 2025","passed","Fri Jan 03 06:09:39 UTC 2025","","","",""
+"","93","Unauthorized User Creates a valid book","","Fri Jan 03 06:09:37 UTC 2025","passed","Fri Jan 03 06:09:37 UTC 2025","","","",""
+"As an admin  or user
+  I want to update a book
+  So that I can manage the books in the library","80","User attempts to update a book with an invalid ID","","Fri Jan 03 06:09:39 UTC 2025","passed","Fri Jan 03 06:09:39 UTC 2025","","","",""
