@@ -5,6 +5,7 @@ import { ServerResponse } from "../models/ServerResponse";
 import { UserRole } from "../data/enum/UserRole";
 import { EndPoint } from "../data/enum/EndPoint";
 import { ResponseStatusCode } from "../data/enum/ResponseStatusCode";
+import { Book } from "../models/Book";
 
 export class BookRetrieval {
     private request: APIRequestContext;
@@ -15,12 +16,13 @@ export class BookRetrieval {
         this.requestHandler = new RequestHandler(this.request);
     }
 
-    public async getBookAdminValid(bookId: string) {
+    public async getBookAdminValid(bookId: string): Promise<Book> {
         const response: ServerResponse = await this.requestHandler.getRequest(UserRole.ADMIN, EndPoint.GETBOOKBYID, bookId);
         
         expect(response.status).toBe(ResponseStatusCode.OK);
         expect(response.json).toHaveProperty("id", bookId);
         console.log(`Admin successfully retrieved book: ${bookId}`);
+        return response.json;
     }
 
     public async getBookUserValid(bookId: string) {

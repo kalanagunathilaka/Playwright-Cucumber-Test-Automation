@@ -1,4 +1,4 @@
-import { BookRetrievalAll } from './../../requests/BookRetrievalAll';
+import { BookRetrievalAll } from '../../requests/BookRetrievalAll';
 import { Given, setDefaultTimeout, Then, When } from '@cucumber/cucumber';
 import { BookCreation } from '../../requests/BookCreation';
 import { UserRole } from '../../data/enum/UserRole';
@@ -35,6 +35,19 @@ When('Admin creates the same book again', async function () {
     console.log('\nAdmin Creates the same book again');
     const bookCreation: BookCreation = new BookCreation(this.context);
     await bookCreation.createSameBook(UserRole.ADMIN);
+});
+
+When('Admin creates a book with CustomID', async function () {
+    console.log('\nAdmin creates a book with CustomID');
+    this.customID = new Date().getTime();
+    const bookCreation: BookCreation = new BookCreation(this.context);
+    await bookCreation.validBookCreation(UserRole.ADMIN, this.customID);
+});
+
+Then('Response book id should be equal to CustomID', async function () {
+    console.log('\nResponse book id should be equal to CustomID');
+    const bookRetrieval: BookRetrieval = new BookRetrieval(this.context);
+    await bookRetrieval.getBookAdminValid(this.customID);
 });
 
 When('Admin creates a book without mandatory fields', async function () {
