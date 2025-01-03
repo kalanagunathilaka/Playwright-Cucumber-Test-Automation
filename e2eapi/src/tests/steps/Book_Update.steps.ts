@@ -20,6 +20,7 @@ Given('an Admin has created a book', async function () {
     const bookCreation = new BookCreation(this.context);
     const book = await bookCreation.validBookCreation(); // Create the book
     this.bookId = book.id;
+    this.bookTitle = book.title;
     console.log(`Book created: ${this.bookId} - ${book.title}`);
 });
 
@@ -84,6 +85,7 @@ Then('the book should not be updated', async function () {
 
 When('the admin sends the update request with missing ID', async function () {
      const bookUpdate = new BookUpdate(this.context);
+     updatedBook.id = this.bookId;
      console.log('Admin attempting to update book with missing ID');
      this.response = await bookUpdate.updateBookAdminMissingId(updatedBook);
 });
@@ -95,6 +97,7 @@ Then('the admin should see a 405 Method Not Allowed error', async function () {
 
 When('the admin sends the update request with missing title', async function () {
     const bookUpdate = new BookUpdate(this.context);
+    updatedBook.id = this.bookId;
     console.log('Admin attempting to update book with missing title');
     this.response =await bookUpdate.updateBookAdminMissingTitle(updatedBook);
 });
@@ -106,12 +109,15 @@ Then('the admin should see a 400 Bad Request error', async function () {
 
 When('the admin sends the update request with missing author', async function () {
     const bookUpdate = new BookUpdate(this.context);
+    updatedBook.id = this.bookId;
+    updatedBook.title = this.bookTitle;
     console.log('Admin attempting to update book with missing author');
     this.response =await bookUpdate.updateBookAdminMissingAuthor(updatedBook);
 });
 
 When('the user sends the update request with missing ID', async function () {
     const bookUpdate = new BookUpdate(this.context);
+    updatedBook.id = this.bookId;
     console.log('User attempting to update book with missing ID');
     this.response =await bookUpdate.updateBookUserMissingId(updatedBook);
 
@@ -124,6 +130,7 @@ Then('the user should see a 405 Method Not Allowed error', async function () {
 
 When('the user sends the update request with missing title', async function () {
     const bookUpdate = new BookUpdate(this.context);
+    updatedBook.id = this.bookId;
     console.log('User attempting to update book with missing title');
     this.response =await bookUpdate.updateBookUserMissingTitle(updatedBook);
 });
@@ -135,6 +142,7 @@ Then('the user should see a 403 Forbidden error', async function () {
 
 When('the user sends the update request with missing author', async function () {
     const bookUpdate = new BookUpdate(this.context);
+    updatedBook.id = this.bookId;
     console.log('User attempting to update book with missing author');
     this.response =await bookUpdate.updateBookUserMissingAuthor(updatedBook);
 });

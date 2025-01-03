@@ -3,7 +3,20 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx cucumber-js --format progress",
+    "test:all": "npx cucumber-js --format progress",
+
+    "test:create": "npx cucumber-js --format progress --tags @creation",
+    "test:retrieval": "npx cucumber-js --format progress --tags @retrieval",
+    "test:update": "npx cucumber-js --format progress --tags @update",
+    "test:delete": "npx cucumber-js --format progress --tags @deletion",
+
+    "test:kalana": "npx cucumber-js --format progress --tags @kalana",
+    "test:thurshani": "npx cucumber-js --format progress --tags @thurshani",
+    "test:piyumanthi": "npx cucumber-js --format progress --tags @piyumanthi",
+    "test:prasadi": "npx cucumber-js --format progress --tags @prasadi",
+    "test:anudhi": "npx cucumber-js --format progress --tags @anudhi",
+    "test:yesitha": "npx cucumber-js --format progress --tags @yesitha",
+
     "test:cucumber": "cucumber-js test",
     "test:cucumber-htmlreport": " npx cucumber-js --format html:cucumber-report.html",
     "convert:allure": "allure-cucumberjs -i reports/cucumber_report.json -o allure-results",

@@ -17,11 +17,12 @@ export class BookCreation {
         this.requestHandler = new RequestHandler(this.request);
     }
 
-    public async validBookCreation(userRole: UserRole = UserRole.ADMIN): Promise<Book> {
+    public async validBookCreation(userRole: UserRole = UserRole.ADMIN, customID?: any): Promise<Book> {
         const uniqueTimestamp = new Date().getTime();
         const randomStr = `API_Test_${uniqueTimestamp}`;
 
         const book: Book = {
+            id: customID ?? undefined,
             //id: data.sharedData.randomInt,
             title: `${randomStr}_TITLE`,
             author: `${randomStr}_AUTHOR`,
@@ -60,11 +61,21 @@ export class BookCreation {
         console.log('Book already exists');
     }
 
-    public async invalidBookCreation(userRole: UserRole = UserRole.ADMIN, receivingData: any): Promise<void> {
+    public async createBookWithIntegerID(userRole: UserRole = UserRole.ADMIN): Promise<void> {
         const uniqueTimestamp = new Date().getTime();
         const randomStr = `API_Test_${uniqueTimestamp}`;
 
-        console.log("\nReceiving Data: ", receivingData);
+        const defaultBook: Book = {
+            id: Number(uniqueTimestamp),
+            title: `${randomStr}_TITLE`,
+            author: `${randomStr}_AUTHOR`,
+        };
+        
+    }
+
+    public async invalidBookCreation(userRole: UserRole = UserRole.ADMIN, receivingData: any): Promise<void> {
+        const uniqueTimestamp = new Date().getTime();
+        const randomStr = `API_Test_${uniqueTimestamp}`;
 
         const defaultBook: Book = {
             id: Number(uniqueTimestamp),

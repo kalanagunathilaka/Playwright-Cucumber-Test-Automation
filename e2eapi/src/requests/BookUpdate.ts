@@ -74,7 +74,7 @@ export class BookUpdate {
     }
 
     public async updateBookAdminMissingAuthor(updatedBook: Book) {
-        const incompleteBook = { ...updatedBook, author: undefined, title: `UpdatedTitle_${new Date().getTime()}` }; 
+        const incompleteBook = { ...updatedBook, author: undefined }; 
         delete incompleteBook.author// Clear author
         const response: ServerResponse = await this.requestHandler.putRequest(UserRole.ADMIN, EndPoint.UPDATEBOOK, incompleteBook, incompleteBook.id);
         expect(response.status).toBe(ResponseStatusCode.BAD_REQUEST);

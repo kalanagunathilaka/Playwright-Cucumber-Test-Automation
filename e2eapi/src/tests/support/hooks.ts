@@ -12,10 +12,6 @@ Before(async function() {
     this.context = context;
 })
 
-Before({tags: "@admin"}, async function() {
-    //this will execute before scenarios with tag @admin
-})
-
 After(async function() {
     console.log('\n***********************************************************');
 })
@@ -23,13 +19,4 @@ After(async function() {
 AfterAll(async function() {
     console.log('Global Wrapup: Closing Playwright API Request Context...');
     console.log('***********************************************************');
-})
-
-BeforeStep(async function() {
-    //this will execute before each step
-})
-
-
-AfterStep(async function({ result }) {
-    //this will execute after each step
 })

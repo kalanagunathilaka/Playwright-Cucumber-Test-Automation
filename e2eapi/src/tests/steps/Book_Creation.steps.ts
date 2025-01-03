@@ -37,6 +37,19 @@ When('Admin creates the same book again', async function () {
     await bookCreation.createSameBook(UserRole.ADMIN);
 });
 
+When('Admin creates a book with CustomID', async function () {
+    console.log('\nAdmin creates a book with CustomID');
+    const customID = new Date().getTime();
+    const bookCreation: BookCreation = new BookCreation(this.context);
+    await bookCreation.validBookCreation(UserRole.ADMIN, customID);
+});
+
+Then('Response id should be equal to CustomID', async function () {
+    console.log('\nResponse id should be equal to CustomID');
+    const bookRetrieval: BookRetrieval = new BookRetrieval(this.context);
+    await bookRetrieval.getBookAdminValid(this.customID);
+});
+
 When('Admin creates a book without mandatory fields', async function () {
     console.log('\nAdmin creates a book without mandatory fields');
     const bookCreation: BookCreation = new BookCreation(this.context);
