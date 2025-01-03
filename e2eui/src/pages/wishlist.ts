@@ -27,23 +27,7 @@ export class Wishlist {
         this.cart = new Cart();
     }
 
-    // Verify that the user is not logged in
-    public async verifyUserIsNotLoggedIn() {
-        this.page = await this.playwrightConfig.getPage();
-        const isLoggedIn = await this.pageHelper.verifyUserIsLoggedIn();
-        if (isLoggedIn) {
-            await this.login.logout(true);
-        }
-    }
 
-    // Verify that the user is logged in
-    public async verifyUserIsLoggedIn() {
-        this.page = await this.playwrightConfig.getPage();
-        const isLoggedIn = await this.pageHelper.verifyUserIsLoggedIn();
-        if (!isLoggedIn) {
-            await this.login.login();
-        }
-    }
 
     // Verify that the wishlist icon is not visible
     public async verifyWishlistIconNotVisible(): Promise<void> {
@@ -194,12 +178,6 @@ export class Wishlist {
         console.log('Book added to cart from wishlist');
     }
 
-    // Verify that the book is added to the cart
-    public async verifyBookAddedToCart(): Promise<void> {
-        this.page = await this.playwrightConfig.getPage();
-
-        const book: Book = this.dataFactory.getData().wishlistData.bookDetails;
-        await this.cart.verifyItemAddedToCart(book);
-        console.log('Verified that the book is added to the cart');
-    }
+    
+    
 }

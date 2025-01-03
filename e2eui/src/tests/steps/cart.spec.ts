@@ -2,25 +2,11 @@ import { Given, Then, When } from "@cucumber/cucumber";
 import { Login } from "../../pages/login";
 import { Cart } from "../../pages/cart";
 import { Book } from "../../models/Book";
+import { Homepage } from "../../pages/homepage";
 
-const login = new Login();
+
 const cartPage = new Cart();
 
-Given("an user has logged in", async function () {
-  await login.login();
-  console.log("\nUser has logged in");
-});
-
-Given("an user has not logged in", async function () {
-  await login.verifyNotLoggedIn();
-  console.log("\nUser has not logged in");
-});
-
-When("the user adds the book to cart via Home page", async function () {
-  console.log("\nAdding the book to cart via Home page");
-  this.book = await cartPage.addBookToCartViaHomePage();
-  
-});
 
 Then("the same book should be added to cart successfully", async function () {
   console.log(
@@ -37,8 +23,7 @@ When("the user removes the same book from cart", async function () {
   await cartPage.removeBookFromCart(this.book);
 });
 
-Then(
-  "the same book should be removed from cart successfully",
+Then("the same book should be removed from cart successfully",
   async function () {
     await cartPage.verifyItemRemovedFromCart(this.book);
   }
@@ -48,8 +33,7 @@ When("the user increase the quantity of the book in cart", async function () {
   this.cartItem = await cartPage.increaseQuantityOfBookInCart(this.book);
 });
 
-Then(
-  "the quantity of the book should be increased successfully",
+Then("the quantity of the book should be increased successfully",
   async function () {
     await cartPage.verifyBookQuantityUpdated(this.cartItem, "+");
   }
@@ -76,27 +60,17 @@ When("the user decrease the quantity of the book in cart", async function () {
   this.cartItem = await cartPage.decreaseQuantityOfBookInCart(this.book);
 });
 
-Then(
-  "the quantity of the book should be decrease successfully",
+Then("the quantity of the book should be decrease successfully",
   async function () {
     await cartPage.verifyBookQuantityUpdated(this.cartItem, "-");
   }
 );
 
-When("the user adds the book to cart via Item detail Page", async function () {
-  console.log("\nAdding the book to cart via Item detail page");
-  this.book = await cartPage.addBookToCartViaItemDetailPage();
+Then('Book should be added to the cart', async function () {
+  console.log('\nCheck if the book is added to the cart');
+  await cartPage.verifyBookAddedToCart();
 });
 
-// When("the user selects two random books from the Home page", async function () {
-//   console.log("\nUser is selecting two random books from the Home page");
-//   this.selectedBooks = await cartPage.selectTwoRandomBooksFromHomePage();
-// });
 
-// Then("the details of both books should be displayed correctly", async function () {
-//   console.log("\nVerifying details of both selected books");
-//   for (const book of this.selectedBooks) {
-//     await cartPage.verifyBookDetails(book);
-//   }
-// });
+
 

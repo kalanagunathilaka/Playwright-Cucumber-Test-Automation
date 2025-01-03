@@ -23,59 +23,7 @@ export class BookDetails {
     this.pageHelper = new PageHelper();
   }
 
-  public async selectTwoBooks(): Promise<Array<Book & { index: number }>> {
-    {
-      this.page = await this.playwrightConfig.getPage();
-      const data = this.dataFactory.getData();
-      await this.page.goto(Url.BASEURL);
-
-      const selectedBooks: Array<Book & { index: number }> = []; // Extend the Book type to include 'index'
-      
-      //verify Home page
-      await Promise.all([
-        expect(this.page.locator(HomePageLocators.FilterTitle).getByText("Price Filter")).toBeVisible(),
-        expect(this.page).toHaveURL(Url.BASEURL),
-        expect(this.page.locator(HomePageLocators.BookCard).first()).toBeVisible(),
-      ]);
-      //get book details from Book card
-      const BookCards = HomePageLocators.BookCard;
-      const count = await this.page.locator(BookCards).count();
-      const selectedTwoRandomBooksIndexes = this.generateTwoUniqueRandomNumbers(count);
-      
-      console.log(`Selected book indexes: ${selectedTwoRandomBooksIndexes}`);
-
-      for (const index of selectedTwoRandomBooksIndexes) {
-        await this.page.locator(HomePageLocators.BookCardTitle).nth(index).waitFor({ state: 'visible' });
-        console.log(`Selected book index: ${index}`);
-        const Title = await this.page.locator(HomePageLocators.BookCardTitle).nth(index).textContent();
-        const Price = await  this.page.locator(HomePageLocators.BookCardPrice).nth(index).textContent();
-        console.log(`Selected book: ${Title}`);
-        const book: Book & { index: number } = {
-          index,
-          title: Title,
-          price: Price,
-          author: null,
-          category: null,
-        };
-     
-        selectedBooks.push(book);
-       
-      }
-      console.log(`Selected books: ${selectedBooks[0].title + " & " + selectedBooks[1].title}`);
-      return selectedBooks;
-    }
-  }
-
-  public generateTwoUniqueRandomNumbers(count: number): number[] {
-    const firstNumber = Math.floor(Math.random() * count) + 1;
-    let secondNumber;
-
-    do {
-      secondNumber = Math.floor(Math.random() * count) + 1;
-    } while (secondNumber === firstNumber);
-
-    return [firstNumber, secondNumber];
-  }
+ 
 
   public async verifyBookDetails(selctedBooksWithIndex: Array<Book & { index: number }>): Promise<void> {
     {
@@ -94,5 +42,43 @@ export class BookDetails {
       }
     }
   }
+
+  public async addBookToCartViaItemDetailPage(): Promise<Book> {
+    this.page = await this.playwrightConfig.getPage();
+    const data = this.dataFactory.getData();
+    await this.page.goto(Url.BASEURL);
+
+    // Verify Home Page
+    await Promise.all([
+        expect(this.page.locator(HomePageLocators.FilterTitle).getByText("Price Filter")).toBeVisible(),
+        expect(this.page).toHaveURL(Url.BASEURL),
+        expect(this.page.locator(HomePageLocators.BookCard).first()).toBeVisible(),
+    ]);
+
+    // Click on the first book's title to navigate to the Item Detail Page
+    const firstBookCard = this.page.locator(HomePageLocators.BookCard).first();
+    await firstBookCard.locator(HomePageLocators.BookCardTitle).click();
+
+    // Wait for Item Detail Page to load and verify
+    await this.page.waitForSelector(ItemDetailPageLocators.Title, { state: "visible" });
+
+    
+    const book: Book = {
+        title: await this.page.locator(ItemDetailPageLocators.Title).textContent(),
+        author: await this.page.locator(ItemDetailPageLocators.Author).textContent(),
+        category: await this.page.locator(ItemDetailPageLocators.Category).textContent(),
+        price: await this.page.locator(ItemDetailPageLocators.Price).textContent(),
+    };
+
+    // Click the "Add to Cart" button
+    await this.page.waitForSelector(ItemDetailPageLocators.AddToCartButton, { state: "visible" });
+    await this.page.locator(ItemDetailPageLocators.AddToCartButton).first().click();
+   
+
+    await this.page.waitForTimeout(1000);
+
+    console.log(`Book added to cart from Item Detail Page: ${book.title} - ${book.price}`);
+    return book;
+}
   
 }
