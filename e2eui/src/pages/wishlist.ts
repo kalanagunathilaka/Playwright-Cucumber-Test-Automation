@@ -49,6 +49,7 @@ export class Wishlist {
         let wishListCountBefore = await this.getWishlistCount();
         const classAttribute = await this.page.getAttribute(WishlistLocators.ADD_TO_WISHLIST_BUTTON, 'class');
         const isSelected = classAttribute?.includes('favourite-selected');
+        // await this.page.pause();
 
         if (isSelected) {
             await this.toggleWishlistItem(false); // Remove item
@@ -56,6 +57,8 @@ export class Wishlist {
         } else {
             await this.toggleWishlistItem(true);  // Add item
         }
+       //wait 1s for the wishlist count to update
+        await this.page.waitForTimeout(1000);
 
         const wishListCountAfter = await this.getWishlistCount();
         const expectedCount = isSelected ? wishListCountBefore : wishListCountBefore + 1;
@@ -133,6 +136,7 @@ export class Wishlist {
         await this.pageHelper.urlNavigate(Url.WISHLIST);
 
         const clearWishlistButtonIsVisible = await this.page.isVisible(WishlistLocators.CLEAR_WISHLIST_BUTTON);
+        this.page.waitForTimeout(1000);
 
         if (!clearWishlistButtonIsVisible) {
             console.log('Wishlist is already empty');

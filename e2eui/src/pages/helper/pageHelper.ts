@@ -19,7 +19,11 @@ export class PageHelper {
         const userName = this.dataFactory.getData().loginData.userDetails.userName;
         
         await this.urlNavigate(Url.BASEURL);
-
+        //wait for the page to load
+       await this.page.waitForTimeout(3000);
+        await this.page.waitForSelector(HeaderLocators.GITHUB, {
+                    state: "visible",
+                });
         const loginVisible = await this.page.isVisible(HeaderLocators.LOGIN);
         const usernameVisible = await this.page.isVisible(`${HeaderLocators.USERNAME}:has-text("${userName}")`);
 

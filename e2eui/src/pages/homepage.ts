@@ -152,7 +152,7 @@ export class Homepage {
             };
             //wait for add to cart button
             await this.page.waitForSelector(HomePageLocators.HomePageFirstAddToCartButton, { state: "visible" });
-    
+            await this.page.mouse.move(0, 0);
             //click add to cart button in Book card
             await this.page.locator(HomePageLocators.HomePageFirstAddToCartButton).click();
     
