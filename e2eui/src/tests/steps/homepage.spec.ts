@@ -35,3 +35,14 @@ Then('the list of books displayed should be updated according to the selected pr
     await homepage.verifyChangedPriceFromPriceFilter()
 
 });
+
+When("the user adds the book to cart via Home page", async function () {
+    console.log("\nAdding the book to cart via Home page");
+    this.book = await homepage.addBookToCartViaHomePage();
+    
+  });
+
+When("the user selects two random books from the Home page", async function () {
+    console.log("\nSelecting and verifying two random books...");
+     this.selctedBooksWithIndex= await homepage.selectTwoBooks();
+  });

@@ -27,23 +27,7 @@ export class Wishlist {
         this.cart = new Cart();
     }
 
-    // Verify that the user is not logged in
-    public async verifyUserIsNotLoggedIn() {
-        this.page = await this.playwrightConfig.getPage();
-        const isLoggedIn = await this.pageHelper.verifyUserIsLoggedIn();
-        if (isLoggedIn) {
-            await this.login.logout(true);
-        }
-    }
 
-    // Verify that the user is logged in
-    public async verifyUserIsLoggedIn() {
-        this.page = await this.playwrightConfig.getPage();
-        const isLoggedIn = await this.pageHelper.verifyUserIsLoggedIn();
-        if (!isLoggedIn) {
-            await this.login.login();
-        }
-    }
 
     // Verify that the wishlist icon is not visible
     public async verifyWishlistIconNotVisible(): Promise<void> {
@@ -65,6 +49,7 @@ export class Wishlist {
         let wishListCountBefore = await this.getWishlistCount();
         const classAttribute = await this.page.getAttribute(WishlistLocators.ADD_TO_WISHLIST_BUTTON, 'class');
         const isSelected = classAttribute?.includes('favourite-selected');
+        // await this.page.pause();
 
         if (isSelected) {
             await this.toggleWishlistItem(false); // Remove item
@@ -72,6 +57,8 @@ export class Wishlist {
         } else {
             await this.toggleWishlistItem(true);  // Add item
         }
+       //wait 1s for the wishlist count to update
+        await this.page.waitForTimeout(1000);
 
         const wishListCountAfter = await this.getWishlistCount();
         const expectedCount = isSelected ? wishListCountBefore : wishListCountBefore + 1;
@@ -149,6 +136,7 @@ export class Wishlist {
         await this.pageHelper.urlNavigate(Url.WISHLIST);
 
         const clearWishlistButtonIsVisible = await this.page.isVisible(WishlistLocators.CLEAR_WISHLIST_BUTTON);
+        this.page.waitForTimeout(1000);
 
         if (!clearWishlistButtonIsVisible) {
             console.log('Wishlist is already empty');
@@ -194,12 +182,6 @@ export class Wishlist {
         console.log('Book added to cart from wishlist');
     }
 
-    // Verify that the book is added to the cart
-    public async verifyBookAddedToCart(): Promise<void> {
-        this.page = await this.playwrightConfig.getPage();
-
-        const book: Book = this.dataFactory.getData().wishlistData.bookDetails;
-        await this.cart.verifyItemAddedToCart(book);
-        console.log('Verified that the book is added to the cart');
-    }
+    
+    
 }
