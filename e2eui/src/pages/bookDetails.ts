@@ -5,91 +5,94 @@ import { expect } from "playwright/test";
 import { HomePageLocators } from "../locators/homePageLocators";
 import { ItemDetailPageLocators } from "../locators/itemDetailPageLocators";
 import { Book } from "../models/Book";
+import { DataFactory } from "../utils/dataFactory";
+import { PageHelper } from "./helper/pageHelper";
 
 export class BookDetails {
-  private page!: Page;  // Add the '!' to indicate this will be initialized later
+
+
+
+  private page: Page = undefined as unknown as Page;
   private playwrightConfig: PlaywrightConfig;
+  private dataFactory: DataFactory;
+  private pageHelper: PageHelper;
 
   constructor(playwrightConfig: PlaywrightConfig) {
-    this.playwrightConfig = playwrightConfig;
+    this.playwrightConfig = PlaywrightConfig.getInstance();
+    this.dataFactory = DataFactory.getInstance();
+    this.pageHelper = new PageHelper();
   }
 
-  // Initialize page asynchronously in this method
-  public async initializePage(): Promise<void> {
-    this.page = await this.playwrightConfig.getPage();
-  }
-
-  public async selectAndVerifyTwoBooks(): Promise<void> {
-    // Ensure the page is initialized before using it
-    await this.initializePage();
-
-    await this.page.goto(Url.BASEURL);
-
-    // Verify the home page
-    await Promise.all([
-      expect(this.page.locator(HomePageLocators.BookCard)).toBeVisible(),
-      expect(this.page).toHaveURL(Url.BASEURL),
-    ]);
-
-    // Get the total number of books, limit to the first 40
-    const totalBooks = Math.min(
-      await this.page.locator(HomePageLocators.BookCard).count(),
-      40
-    );
-
-    // Select two random indices within the first 40
-    const randomIndices = Array.from(
-      new Set([Math.floor(Math.random() * totalBooks), Math.floor(Math.random() * totalBooks)])
-    );
-
-    for (const index of randomIndices) {
-      const bookCard = this.page.locator(HomePageLocators.BookCard).nth(index);
-
-      // Capture book details (name and price) from the home page
-      const expectedBook: Partial<Book> = {
-        title: await bookCard.locator(HomePageLocators.BookCardTitle).textContent(),
-        price: await bookCard.locator(HomePageLocators.BookCardPrice).textContent(),
-      };
-
-      console.log(`Expected book details (Home Page): ${JSON.stringify(expectedBook)}`);
-
-      // Click on the book card to navigate to the details page
-      await bookCard.locator(HomePageLocators.BookCardTitle).click();
-
-      // Wait for the details page to load
-      await this.page.waitForSelector(ItemDetailPageLocators.Title, { state: "visible" });
-
-      // Verify the book name and price on the details page
-      const actualBook: Partial<Book> = {
-        title: await this.page.locator(ItemDetailPageLocators.Title).textContent(),
-        price: await this.page.locator(ItemDetailPageLocators.Price).textContent(),
-      };
-
-      expect(actualBook.title).toBe(expectedBook.title);
-      expect(actualBook.price).toBe(expectedBook.price);
-
-      console.log(`Verified book details (Details Page): ${JSON.stringify(actualBook)}`);
-
-      // Navigate back to the home page
+  public async selectTwoBooks(): Promise<Array<Book & { index: number }>> {
+    {
+      this.page = await this.playwrightConfig.getPage();
+      const data = this.dataFactory.getData();
       await this.page.goto(Url.BASEURL);
+
+      const selectedBooks: Array<Book & { index: number }> = []; // Extend the Book type to include 'index'
+      
+      //verify Home page
+      await Promise.all([
+        expect(this.page.locator(HomePageLocators.FilterTitle).getByText("Price Filter")).toBeVisible(),
+        expect(this.page).toHaveURL(Url.BASEURL),
+        expect(this.page.locator(HomePageLocators.BookCard).first()).toBeVisible(),
+      ]);
+      //get book details from Book card
+      const BookCards = HomePageLocators.BookCard;
+      const count = await this.page.locator(BookCards).count();
+      const selectedTwoRandomBooksIndexes = this.generateTwoUniqueRandomNumbers(count);
+      
+      console.log(`Selected book indexes: ${selectedTwoRandomBooksIndexes}`);
+
+      for (const index of selectedTwoRandomBooksIndexes) {
+        await this.page.locator(HomePageLocators.BookCardTitle).nth(index).waitFor({ state: 'visible' });
+        console.log(`Selected book index: ${index}`);
+        const Title = await this.page.locator(HomePageLocators.BookCardTitle).nth(index).textContent();
+        const Price = await  this.page.locator(HomePageLocators.BookCardPrice).nth(index).textContent();
+        console.log(`Selected book: ${Title}`);
+        const book: Book & { index: number } = {
+          index,
+          title: Title,
+          price: Price,
+          author: null,
+          category: null,
+        };
+     
+        selectedBooks.push(book);
+       
+      }
+      console.log(`Selected books: ${selectedBooks[0].title + " & " + selectedBooks[1].title}`);
+      return selectedBooks;
     }
   }
 
-  public async verifyBookDetails(expectedBook: Book): Promise<void> {
-    if (!this.page) {
-      throw new Error("Page not initialized");
-    }
+  public generateTwoUniqueRandomNumbers(count: number): number[] {
+    const firstNumber = Math.floor(Math.random() * count) + 1;
+    let secondNumber;
 
-    const title = await this.page.locator(ItemDetailPageLocators.Title).textContent();
-    const author = await this.page.locator(ItemDetailPageLocators.Author).textContent();
-    const category = await this.page.locator(ItemDetailPageLocators.Category).textContent();
-    const price = await this.page.locator(ItemDetailPageLocators.Price).textContent();
+    do {
+      secondNumber = Math.floor(Math.random() * count) + 1;
+    } while (secondNumber === firstNumber);
 
-    expect(title).toBe(expectedBook.title);
-    expect(author).toBe(expectedBook.author);
-    expect(category).toBe(expectedBook.category);
-    expect(price).toBe(expectedBook.price);
-
-    console.log(`Verified details for book: ${expectedBook.title}`);
+    return [firstNumber, secondNumber];
   }
+
+  public async verifyBookDetails(selctedBooksWithIndex: Array<Book & { index: number }>): Promise<void> {
+    {
+      this.page = await this.playwrightConfig.getPage();
+      await this.page.goto(Url.BASEURL);
+      const BookCards = HomePageLocators.BookCard;
+      for (const book of selctedBooksWithIndex) {
+        const selectedBookCard = this.page.locator(BookCards).nth(book.index);
+        await selectedBookCard.click();
+        await this.page.waitForSelector(ItemDetailPageLocators.Title);
+        expect(await this.page.locator(ItemDetailPageLocators.Title).textContent()).toContain(book.title);
+        expect(await this.page.locator(ItemDetailPageLocators.Price).textContent()).toContain(book.price);
+        console.log(`Book details verified: ${book.title}`);
+        await this.page.goBack();
+
+      }
+    }
+  }
+  
 }

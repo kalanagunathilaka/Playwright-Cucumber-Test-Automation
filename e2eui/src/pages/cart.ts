@@ -31,22 +31,19 @@ export class Cart {
         const data = this.dataFactory.getData();
         await this.page.goto(Url.BASEURL);
 
+        
+
         //verify Home page
         await Promise.all([
             expect(this.page.locator(HomePageLocators.FilterTitle).getByText("Price Filter")).toBeVisible(),
-            expect(this.page).toHaveURL(Url.BASEURL),
-            expect(this.page.locator(HomePageLocators.BookCard).first()).toBeVisible(),
+            expect(this.page).toHaveURL(Url.BASEURL)
         ]);
         //get book details from Book card
-        const firstBookCardSelector = HomePageLocators.BookCard;
-        const firstBookCard = this.page.locator(firstBookCardSelector).first();
+      
+        await this.page.locator(HomePageLocators.BookCardTitle).nth(0).waitFor({ state: 'visible' });
         const book: Book = {
-            title: await firstBookCard
-                .locator(HomePageLocators.BookCardTitle)
-                .textContent(),
-            price: await firstBookCard
-                .locator(HomePageLocators.BookCardPrice)
-                .textContent(),
+            title :await this.page.locator(HomePageLocators.BookCardTitle).nth(0).textContent(),
+            price : await this.page.locator(HomePageLocators.BookCardPrice).nth(0).textContent(),
             author: null,
             category: null,
         };
@@ -70,7 +67,7 @@ export class Cart {
             state: "visible",
         });
         await this.page.waitForSelector(CartLocators.CartRow);
-
+       
         let matchingRow = await this.findMatchingRow(book);
         expect(matchingRow).toBeTruthy();
         console.log(`Book added to cart & Verified: ${book.title} - ${book.price}`);
