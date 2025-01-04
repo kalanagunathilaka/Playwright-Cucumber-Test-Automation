@@ -58,11 +58,8 @@ jobs:
 
     - name: Run Cucumber Tests & Generate Allure Results
       working-directory: ./e2eapi
-      run: |
-        echo "Running tests on ${BASE_URL}"
-        echo "USERNAME : ${ADMIN_USERNAME} PASSWORD :${PASSWORD}"
-        npx cucumber-js
-        continue-on-error: true
+      run: npx cucumber-js 
+      continue-on-error: true
 
     - name: Generate Allure Report
       working-directory: ./e2eapi
