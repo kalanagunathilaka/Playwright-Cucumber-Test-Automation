@@ -1,9 +1,9 @@
-const BASE_URL = "api/books";
+const URL = "api/books";
 
 export enum EndPoint {
-    GETALLBOOKS = `${BASE_URL}`,
-    GETBOOKBYID = `${BASE_URL}`,
-    CREATEBOOK = `${BASE_URL}`,
-    UPDATEBOOK = `${BASE_URL}`,
-    DELETEBOOK = `${BASE_URL}`,
+    GETALLBOOKS = `${URL}`,
+    GETBOOKBYID = `${URL}`,
+    CREATEBOOK = `${URL}`,
+    UPDATEBOOK = `${URL}`,
+    DELETEBOOK = `${URL}`,
 }
