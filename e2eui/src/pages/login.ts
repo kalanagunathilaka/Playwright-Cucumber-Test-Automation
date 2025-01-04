@@ -37,8 +37,7 @@ export class Login {
         this.page = await this.playwrightConfig.getPage();
 
         if (!isRedirect) {
-            await this.page.goto(Url.LOGIN);
-            //await this.pageHelper.urlNavigate(Url.LOGIN);
+            await this.pageHelper.urlNavigate(Url.LOGIN);
         }
         await Promise.all([
             expect(this.page.locator(LoginLocators.TITLE).getByText("Login")).toBeVisible(),

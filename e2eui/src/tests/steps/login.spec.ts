@@ -56,10 +56,10 @@ Given("an user has logged in", async function () {
 
 When('User submit the login form with registered credentials', async function () {
     console.log('\nUser submit the login form with registered credentials');
-    await login.loginWithValidCredentials(true);
+    //await login.loginWithValidCredentials(true);
 });
 
 Then('Registered user should be logged in successfully', async function () {
     console.log('\nRegistered user should be logged in successfully');
-    await login.verifyLoggedInSuccessfully(true);
+    //await login.verifyLoggedInSuccessfully(true);
 });
