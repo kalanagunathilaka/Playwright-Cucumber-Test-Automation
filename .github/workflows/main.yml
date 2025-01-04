@@ -11,6 +11,12 @@ jobs:
   test-apis:
     runs-on: ubuntu-latest
 
+    env:
+     BASE_URL: ${{ secrets.API_BASE_URL }}
+     ADMIN_USERNAME: ${{ secrets.API_ADMIN_USERNAME }}
+     PASSWORD: ${{ secrets.API_PASSWORD }}
+     USER_USERNAME: ${{ secrets.API_USER_USERNAME }}
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -67,6 +73,11 @@ jobs:
 
   test-uis:
     runs-on: ubuntu-latest
+
+    env:
+     BASE_URL: ${{ secrets.UI_BASE_URL }}
+     UI_USERNAME: ${{ secrets.UI_USERNAME }}
+     PASSWORD: ${{ secrets.UI_PASSWORD }}
 
     steps:
     - name: Checkout code
