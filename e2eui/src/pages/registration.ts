@@ -37,6 +37,7 @@ export class Registration {
     }
 
     public async validRegistration(): Promise<void> {
+        this.page = await this.playwrightConfig.getPage();
         const data = this.dataFactory.getData();
         const firstName = data.sharedData.randomStr;
         const lastName = data.registrationData.userDetails.lastName;
@@ -55,15 +56,14 @@ export class Registration {
         await this.page.fill(RegistrationLocators.PASSWORD, password);
         await this.page.fill(RegistrationLocators.CONFIRMPASSWORD, password);
         await this.page.locator(RegistrationLocators.GENDER).check();
-
-        await this.page.locator(RegistrationLocators.REGISTER_BUTTON).click();
-
+        
         // Wait for the user API response to confirm the registration
-        await this.pageHelper.waitForApiResponse(data.registrationData.apiEndpoints.registerUser);
+        this.pageHelper.waitForApiResponse(data.registrationData.apiEndpoints.registerUser);
+        await this.page.locator(RegistrationLocators.REGISTER_BUTTON).click();
 
         this.dataFactory.setData('registrationData.userDetails.firstName', firstName);
         this.dataFactory.setData('registrationData.userDetails.userName', userName);
-    
+
         console.log(`Registering with... 
             \tFirst Name: ${firstName}, 
             \tLast Name: ${lastName}, 
