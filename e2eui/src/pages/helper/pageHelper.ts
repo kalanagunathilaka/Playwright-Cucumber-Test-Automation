@@ -22,7 +22,10 @@ export class PageHelper {
         //wait for the page to load
        await this.page.waitForTimeout(3000);
         const loginVisible = await this.page.isVisible(HeaderLocators.LOGIN);
-        const usernameVisible = await this.page.isVisible(`${HeaderLocators.USERNAME}:has-text("${userName}")`);
+        const sanitizedUserName = userName.replace(/\s+/g, ' ').replace(/["']/g, '\\"').trim();
+        console.log(`userName before sanitization: ${userName} and after sanitization: ${sanitizedUserName}`);
+        const usernameVisible = await this.page.locator(HeaderLocators.USERNAME).getByText(sanitizedUserName).isVisible();
+        console.log(`loginVisible: ${loginVisible} and usernameVisible: ${usernameVisible}`);
 
         return usernameVisible ? true : loginVisible ? false : (() => { throw new Error("Unable to determine user login status. Neither login nor username is visible."); })();
     }
