@@ -1,3 +1,6 @@
-export enum BaseUrl {
-    LOCAL = "http://localhost:7081",
-}
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+export const BaseUrl = {
+    LOCAL: process.env.BASE_URL || '',
+};

@@ -1,6 +1,9 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 export const authentication = {
-    admin: "admin",
-    user: "user",
+    admin: process.env.ADMIN_USERNAME || '',
+    user: process.env.USER_USERNAME || '',
     unauthorized: "unauthorized",
-    password: "password"
+    password: process.env.PASSWORD || ''
 }

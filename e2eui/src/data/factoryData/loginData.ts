@@ -1,7 +1,10 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 export const loginData = {
     userDetails: {
-        userName: "Reformers_Group_46",
-        password: "Reformers#46",
+        userName: process.env.UI_USERNAME || '',
+        password: process.env.PASSWORD || '',
         firstName: "Reformers",
         lastName: "Group46",
         id: "3993"
