@@ -159,6 +159,7 @@ ITQA_GroupAssignment_Reformers/
 │   ├── package.json         # Dependencies and scripts for UI
 │   ├── package-lock.json    # Lock file for UI project
 │   └── tsconfig.json        # TypeScript configuration for UI
+├── Documents/               # Bug Report and test case docuemnets
 ```
 
 # 🔗 Resources  
