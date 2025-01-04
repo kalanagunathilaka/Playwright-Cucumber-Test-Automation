@@ -60,7 +60,7 @@ jobs:
       working-directory: ./e2eapi
       run: |
         echo "Running tests on ${BASE_URL}"
-        curl -u ${ADMIN_USERNAME}:${PASSWORD} 
+        echo "USERNAME : ${ADMIN_USERNAME} PASSWORD :${PASSWORD}"
         npx cucumber-js
         continue-on-error: true
 
