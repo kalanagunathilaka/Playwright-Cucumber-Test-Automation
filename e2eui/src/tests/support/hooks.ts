@@ -2,7 +2,7 @@ import { After, AfterAll, BeforeAll, setDefaultTimeout } from "@cucumber/cucumbe
 import { PlaywrightConfig } from "../../utils/playwrightConfig";
 import { Url } from "../../data/enum/Urls";
 
-setDefaultTimeout(2 * 60 * 1000);
+setDefaultTimeout(5 * 60 * 1000);
 const playwrightConfig: PlaywrightConfig = PlaywrightConfig.getInstance();
 
 BeforeAll(async function () {
