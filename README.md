@@ -22,7 +22,7 @@ Ensure you have the following installed:
 
 ## Installation
 
-To set up the project locally:
+To set up the project locally: 
 
 1. Clone the repository:
    ```bash
